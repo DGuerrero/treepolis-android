@@ -1,6 +1,7 @@
 <resources>
 
-    <style name="Theme.Ipass" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
         <!--   app branding color for the app bar -->
         <item name="colorPrimary">@color/primary</item>
