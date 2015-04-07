@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">Treepolis</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="facebook_app_id">796026713818647</string>
+    <string name="parse_app_id">LVENJltnSKPJ9WuFELQcY4DGY0WbGYR2bTsknara</string>
+    <string name="parse_client_key">SCDgdXIkEB6FfxmuU3EuD5HwSJtAqMEmLAhPSZ6S</string>
+
     <string name="action_settings">Settings</string>
     <string name="title_activity_signup">Welcome</string>
+
+
+
 </resources>

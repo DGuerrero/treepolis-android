@@ -3,20 +3,22 @@ package com.quoders.apps.android.treepolis;
 import android.app.Application;
 
 import com.parse.Parse;
+import com.parse.ParseFacebookUtils;
 
 /**
  * Created by davidguerrerodiaz on 31/03/15.
  */
 public class TreepolisApplication extends Application {
 
-    private static final String PARSE_APP_ID = "LVENJltnSKPJ9WuFELQcY4DGY0WbGYR2bTsknara";
-    private static final String PARSE_CLIENT_KEY = "SCDgdXIkEB6FfxmuU3EuD5HwSJtAqMEmLAhPSZ6S";
-
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        Parse.initialize(this, PARSE_APP_ID, PARSE_CLIENT_KEY);
+        //  Initialize Parse
+        Parse.initialize(this, getString(R.string.parse_app_id), getString(R.string.parse_client_key));
+
+        // Initialize Facebook
+        ParseFacebookUtils.initialize(getApplicationContext());
     }
 }
