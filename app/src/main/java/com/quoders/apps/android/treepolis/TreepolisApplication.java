@@ -2,6 +2,7 @@ package com.quoders.apps.android.treepolis;
 
 import android.app.Application;
 
+import com.facebook.FacebookSdk;
 import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
 
@@ -19,6 +20,7 @@ public class TreepolisApplication extends Application {
         Parse.initialize(this, getString(R.string.parse_app_id), getString(R.string.parse_client_key));
 
         // Initialize Facebook
+        FacebookSdk.sdkInitialize(getApplicationContext());
         ParseFacebookUtils.initialize(getApplicationContext());
     }
 }
