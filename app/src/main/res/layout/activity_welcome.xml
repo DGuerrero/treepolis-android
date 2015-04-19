@@ -1,0 +1,98 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.quoders.apps.android.treepolis.welcome.WelcomeActivity">
+
+    <include layout="@layout/toolbar" />
+
+
+    <TextView
+        android:id="@+id/textViewWelcomeAppName"
+        android:textColor="@color/primary_dark"
+        android:fontFamily="sans-serif-thin"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="@string/signup_welcome"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/editTextEmailLogin"
+        android:layout_below="@+id/textViewWelcomeAppName"
+        android:hint="@string/hint_login_email"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/editTextPasswordLogin"
+        android:layout_below="@+id/editTextEmailLogin"
+        android:hint="@string/hint_login_password"/>
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_below="@id/editTextPasswordLogin"
+        android:text="@string/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/button_login" />
+
+    <TextView
+        android:id="@+id/textViewWelcomeOr"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/loginButton"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primary_dark"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="18dp"
+        android:text="@string/welcome_or"/>
+
+    <Button
+        android:id="@+id/loginFacebookButton"
+        android:layout_below="@id/textViewWelcomeOr"
+        android:layout_width="242dp"
+        android:layout_height="41dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_login_facebook" />
+
+    <TextView
+        android:id="@+id/textViewCreateorLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primary_dark"
+        android:fontFamily="sans-serif-thin"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/loginFacebookButton"
+        android:text="@string/create_or_login_account"/>
+
+
+
+
+</RelativeLayout>
