@@ -28,7 +28,7 @@
         android:ems="10"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="35dp"
         android:id="@+id/editTextEmailLogin"
         android:layout_below="@+id/textViewWelcomeAppName"
         android:hint="@string/hint_login_email"/>
@@ -50,10 +50,10 @@
         android:id="@+id/loginButton"
         android:layout_below="@id/editTextPasswordLogin"
         android:text="@string/login_button"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="41dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/button_login" />
@@ -74,23 +74,38 @@
     <Button
         android:id="@+id/loginFacebookButton"
         android:layout_below="@id/textViewWelcomeOr"
-        android:layout_width="242dp"
+        android:layout_width="250dp"
         android:layout_height="41dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/button_login_facebook" />
 
     <TextView
-        android:id="@+id/textViewCreateorLogin"
+        android:id="@+id/textViewCreateOrLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/primary_dark"
         android:fontFamily="sans-serif-thin"
         android:textSize="18dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="35dp"
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/loginFacebookButton"
         android:text="@string/create_or_login_account"/>
+
+    <TextView
+        android:id="@+id/textViewCreateAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primary_dark"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginLeft="5dp"
+        android:clickable="true"
+        android:layout_toRightOf="@+id/textViewCreateOrLogin"
+        android:layout_toEndOf="@+id/textViewCreateOrLogin"
+        android:layout_alignBaseline="@+id/textViewCreateOrLogin"
+        android:text="@string/create_account"/>
 
 
 

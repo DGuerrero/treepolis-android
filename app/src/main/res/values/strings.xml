@@ -8,16 +8,21 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_signup">Welcome</string>
 
-    <!-- Signup -->
+    <!-- Welcome -->
     <string name="signup_welcome">Welcome to\nTreepolis</string>
-    <string name="title_activity_welcome">WelcomeActivity</string>
-
-    <string name="hello_world">Hello world!</string>
     <string name="create_or_login_account">Don\'t have an account yet?</string>
+    <string name="create_account">Create account!</string>
     <string name="hint_login_email">Email</string>
     <string name="hint_login_password">Password</string>
+    <string name="hint_login_confirm_password">Confirm Password</string>
     <string name="welcome_or">Or</string>
     <string name="login_button">Log In</string>
+
+    <!-- Signup -->
+    <string name="signup_title">Create Account</string>
+    <string name="signup">Sign Up</string>
+    <string name="field_error_empty">Field is empty</string>
+    <string name="field_error_password_diferent">Password does not match</string>
 
 
 </resources>

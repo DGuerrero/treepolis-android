@@ -3,19 +3,38 @@ package com.quoders.apps.android.treepolis.signup;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+import android.widget.EditText;
 
 import com.parse.ParseFacebookUtils;
 import com.quoders.apps.android.treepolis.R;
 
-public class SignupActivity extends ActionBarActivity {
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+public class SignupActivity extends ActionBarActivity implements SignupView {
+
+    @InjectView(R.id.editTextCreateEmail)       EditText mEtCreateEmail;
+    @InjectView(R.id.editTextCreatePassword)    EditText mEtCreatePassword;
+    @InjectView(R.id.editTextPasswordConfirm)   EditText mEtCreatePasswordConfirm;
+
+    @OnClick(R.id.buttonSignUp)
+    public void createAccountClick(View view) {
+        mPresenter.onCreateAccountClick();
+    }
+
+
+    SignupPresenter mPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        ButterKnife.inject(this);
 
-
-
+        mPresenter = new SignupPresenterImpl(this);
     }
 
 
@@ -25,30 +44,35 @@ public class SignupActivity extends ActionBarActivity {
         ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public String getFieldEmail() {
+        return mEtCreateEmail.getText().toString();
+    }
 
+    @Override
+    public String getFieldPassword() {
+        return mEtCreatePassword.getText().toString();
+    }
 
-        //  Signup example
-        /*
-        ParseUser user = new ParseUser();
-        user.setUsername("my name");
-        user.setPassword("my pass");
-        user.setEmail("email@example.com");
+    @Override
+    public String getFieldPasswordConfirm() {
+        return mEtCreatePasswordConfirm.getText().toString();
+    }
 
-        // other fields can be set just like with ParseObject
-        user.put("phone", "650-555-0000");
+    @Override
+    public void setFieldEmailError(int errorMessage) {
+        mEtCreateEmail.setError(getString(errorMessage));
+    }
 
-        user.signUpInBackground(new SignUpCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
-                    // Hooray! Let them use the app now.
-                } else {
-                    // Sign up didn't succeed. Look at the ParseException
-                    // to figure out what went wrong
-                }
-            }
-        });
-         */
+    @Override
+    public void setFieldPasswordError(int errorMessage) {
+        mEtCreatePassword.setError(getString(errorMessage));
+    }
 
+    @Override
+    public void setFieldPasswordConfirmError(int errorMessage) {
+        mEtCreatePasswordConfirm.setError(getString(errorMessage));
+    }
 
 
 }

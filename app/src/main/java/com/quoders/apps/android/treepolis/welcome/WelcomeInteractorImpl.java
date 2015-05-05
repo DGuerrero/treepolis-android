@@ -15,7 +15,7 @@ import java.util.Collection;
 /**
  * Created by davidguerrerodiaz on 19/04/15.
  */
-public class WelcomeInteractorImpl {
+public class WelcomeInteractorImpl implements WelcomeInteractor {
 
     private Context mContext;
 
