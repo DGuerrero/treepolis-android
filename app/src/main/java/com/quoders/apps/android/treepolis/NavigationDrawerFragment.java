@@ -126,8 +126,6 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
 
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
 
         mDrawerToggle = new ActionBarDrawerToggle(
