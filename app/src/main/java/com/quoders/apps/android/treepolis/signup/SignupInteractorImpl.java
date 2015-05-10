@@ -53,13 +53,13 @@ public class SignupInteractorImpl implements SignupInteractor {
 
         switch (code) {
             case ParseException.EMAIL_TAKEN:
-                mContext.getString(R.string.signup_error_email_taken);
+                errorMessage = mContext.getString(R.string.signup_error_email_taken);
                 break;
             case ParseException.INVALID_EMAIL_ADDRESS:
-                mContext.getString(R.string.signup_error_email_invalid);
+                errorMessage = mContext.getString(R.string.signup_error_email_invalid);
                 break;
             case ParseException.USERNAME_TAKEN:
-                mContext.getString(R.string.signup_error_username_taken);
+                errorMessage = mContext.getString(R.string.signup_error_username_taken);
                 break;
         }
 

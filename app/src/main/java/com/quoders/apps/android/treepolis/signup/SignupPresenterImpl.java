@@ -74,8 +74,8 @@ public class SignupPresenterImpl implements SignupPresenter, SignupInteractorImp
     }
 
     @Override
-    public void onSignupError(String errorCode) {
+    public void onSignupError(String errorMessage) {
         mView.stopProgressDialog();
-        mView.showAlertDialog(mContext.getString(R.string.signup_error), errorCode);
+        mView.showAlertDialog(mContext.getString(R.string.signup_error), errorMessage);
     }
 }
