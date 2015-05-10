@@ -12,6 +12,7 @@
     <string name="signup_welcome">Welcome to\nTreepolis</string>
     <string name="create_or_login_account">Don\'t have an account yet?</string>
     <string name="create_account">Create account!</string>
+    <string name="hint_login_username">User Name</string>
     <string name="hint_login_email">Email</string>
     <string name="hint_login_password">Password</string>
     <string name="hint_login_confirm_password">Confirm Password</string>
@@ -23,6 +24,14 @@
     <string name="signup">Sign Up</string>
     <string name="field_error_empty">Field is empty</string>
     <string name="field_error_password_diferent">Password does not match</string>
+    <string name="field_error_email_invalid">Invalid Email</string>
+    <string name="signup_error_unknown">Can not create account at this moment, please try again later.</string>
+    <string name="signup_error_email_taken">The Email address is already taken, please try with a different one.</string>
+    <string name="signup_error_email_invalid">The Email address is invalid, please try again.</string>
+    <string name="signup_error_username_taken">The user name is already taken, please try again with a different one.</string>
+    <string name="signup_progress">Creating account...</string>
+    <string name="signup_error">Signup Error</string>
+    <string name="dialog_button_ok">OK</string>
 
 
 </resources>

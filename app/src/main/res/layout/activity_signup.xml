@@ -30,9 +30,24 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="35dp"
-        android:id="@+id/editTextCreateEmail"
+        android:id="@+id/editTextCreateUserName"
         android:layout_below="@+id/textViewWelcomeAppName"
-        android:hint="@string/hint_login_email"/>
+        android:hint="@string/hint_login_username"
+        android:text="david"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/editTextCreateEmail"
+        android:layout_below="@+id/editTextCreateUserName"
+        android:hint="@string/hint_login_email"
+        android:text="oisinoid@gmail.com"/>
 
 
     <EditText
@@ -45,7 +60,8 @@
         android:layout_marginTop="5dp"
         android:id="@+id/editTextCreatePassword"
         android:layout_below="@+id/editTextCreateEmail"
-        android:hint="@string/hint_login_password"/>
+        android:hint="@string/hint_login_password"
+        android:text="1111"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -57,18 +73,17 @@
         android:layout_marginTop="5dp"
         android:id="@+id/editTextPasswordConfirm"
         android:layout_below="@+id/editTextCreatePassword"
-        android:hint="@string/hint_login_confirm_password"/>
+        android:hint="@string/hint_login_confirm_password"
+        android:text="1111"/>
 
     <Button
         android:id="@+id/buttonSignUp"
-        android:layout_below="@id/editTextPasswordConfirm"
         android:text="@string/signup"
         android:layout_width="250dp"
         android:layout_height="41dp"
+        android:layout_marginBottom="30dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/button_login" />
 
 

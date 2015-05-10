@@ -8,8 +8,16 @@ public interface SignupView {
     String getFieldEmail();
     String getFieldPassword();
     String getFieldPasswordConfirm();
+    String getFieldUserName();
 
     void setFieldEmailError(int errorMessage);
     void setFieldPasswordError(int errorMessage);
     void setFieldPasswordConfirmError(int errorMessage);
+
+    void finishActivity();
+
+    void showAlertDialog(String title, String message);
+    void showProgressDialog(String message);
+    void stopProgressDialog();
+    void stopAlertDialog();
 }

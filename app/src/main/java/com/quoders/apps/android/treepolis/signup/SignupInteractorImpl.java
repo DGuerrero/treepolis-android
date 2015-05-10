@@ -2,43 +2,76 @@ package com.quoders.apps.android.treepolis.signup;
 
 import android.content.Context;
 
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
+import com.quoders.apps.android.treepolis.R;
+
 /**
  * Created by davidguerrerodiaz on 19/04/15.
  */
 public class SignupInteractorImpl implements SignupInteractor {
 
     private Context mContext;
+    private SignupListener mListener;
 
-
-    public SignupInteractorImpl(Context context) {
+    public SignupInteractorImpl(Context context, SignupListener listener) {
 
         this.mContext = context;
+        this.mListener = listener;
     }
 
 
-    public void createAccount(String email, String password) {
+    @Override
+    public void SignUpUser(String userName, String email, String password) {
 
-        /*
         ParseUser user = new ParseUser();
-        user.setUsername("my name");
-        user.setPassword("my pass");
-        user.setEmail("email@example.com");
-
-        // other fields can be set just like with ParseObject
-        user.put("phone", "650-555-0000");
+        user.setUsername(userName);
+        user.setPassword(password);
+        user.setEmail(email);
 
         user.signUpInBackground(new SignUpCallback() {
+
             public void done(ParseException e) {
-                if (e == null) {
-                    // Hooray! Let them use the app now.
+
+                if (e == null && mListener != null) {
+                    mListener.onSignupSuccess();
                 } else {
-                    // Sign up didn't succeed. Look at the ParseException
-                    // to figure out what went wrong
+
+                    if(mListener != null) {
+                        mListener.onSignupError(getSignUpErrorMessage(e.getCode()));
+                    }
                 }
             }
         });
-        */
     }
 
 
+    private String getSignUpErrorMessage(int code) {
+
+        String errorMessage = mContext.getString(R.string.signup_error_unknown);
+
+        switch (code) {
+            case ParseException.EMAIL_TAKEN:
+                mContext.getString(R.string.signup_error_email_taken);
+                break;
+            case ParseException.INVALID_EMAIL_ADDRESS:
+                mContext.getString(R.string.signup_error_email_invalid);
+                break;
+            case ParseException.USERNAME_TAKEN:
+                mContext.getString(R.string.signup_error_username_taken);
+                break;
+        }
+
+        return errorMessage;
+    }
+
+
+
+    public interface SignupListener {
+
+        void  onSignupSuccess();
+        void onSignupError(String errorCode);
+
+    }
 }
