@@ -7,5 +7,6 @@ import android.content.Intent;
  */
 public interface WelcomeView {
 
+    void launchActivityForResult(Intent intent, int requestCode);
     void launchActivity(Intent intent);
 }

@@ -17,6 +17,9 @@ import butterknife.OnClick;
 
 public class SignupActivity extends ActionBarActivity implements SignupView {
 
+    public static final int REQUEST_ID_SIGNUP = 0x0001;
+
+
     @InjectView(R.id.editTextCreateUserName)    EditText mEtCreateUserName;
     @InjectView(R.id.editTextCreateEmail)       EditText mEtCreateEmail;
     @InjectView(R.id.editTextCreatePassword)    EditText mEtCreatePassword;
@@ -102,7 +105,8 @@ public class SignupActivity extends ActionBarActivity implements SignupView {
     }
 
     @Override
-    public void finishActivity() {
+    public void finishActivity(int resultCode) {
+        setResult(resultCode);
         finish();
     }
 

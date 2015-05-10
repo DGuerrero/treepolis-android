@@ -34,4 +34,11 @@
     <string name="dialog_button_ok">OK</string>
 
 
+    <!-- Home -->
+    <string name="title_activity_home">Treepolis</string>
+    <string name="title_section1">Section 1</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
 </resources>

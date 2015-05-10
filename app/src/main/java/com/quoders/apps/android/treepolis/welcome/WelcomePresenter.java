@@ -6,4 +6,6 @@ package com.quoders.apps.android.treepolis.welcome;
 public interface WelcomePresenter {
 
     void onCreateAccountClick();
+
+    void onActivityResultCalled(int requestCode, int result);
 }

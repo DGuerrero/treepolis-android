@@ -14,7 +14,7 @@ public interface SignupView {
     void setFieldPasswordError(int errorMessage);
     void setFieldPasswordConfirmError(int errorMessage);
 
-    void finishActivity();
+    void finishActivity(int resultCode);
 
     void showAlertDialog(String title, String message);
     void showProgressDialog(String message);

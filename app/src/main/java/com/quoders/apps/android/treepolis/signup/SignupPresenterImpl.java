@@ -1,5 +1,6 @@
 package com.quoders.apps.android.treepolis.signup;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.quoders.apps.android.treepolis.R;
@@ -70,7 +71,7 @@ public class SignupPresenterImpl implements SignupPresenter, SignupInteractorImp
     @Override
     public void onSignupSuccess() {
         mView.stopProgressDialog();
-        mView.finishActivity();
+        mView.finishActivity(Activity.RESULT_OK);
     }
 
     @Override

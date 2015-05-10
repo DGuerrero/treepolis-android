@@ -37,10 +37,18 @@ public class WelcomeActivity extends ActionBarActivity implements WelcomeView {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
+
+        mPresenter.onActivityResultCalled(requestCode, resultCode);
+    }
+
+    @Override
+    public void launchActivityForResult(Intent intent, int requestCode) {
+        startActivityForResult(intent, requestCode);
     }
 
     @Override
     public void launchActivity(Intent intent) {
         startActivity(intent);
     }
+
 }
