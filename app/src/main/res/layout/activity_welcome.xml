@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.quoders.apps.android.treepolis.welcome.WelcomeActivity">
+    tools:context="com.quoders.apps.android.treepolis.ui.welcome.WelcomeActivity">
 
     <include layout="@layout/toolbar" />
 
@@ -21,34 +21,49 @@
         android:text="@string/signup_welcome"/>
 
 
-    <EditText
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
+        android:layout_below="@+id/textViewWelcomeAppName"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="35dp"
-        android:id="@+id/editTextEmailLogin"
-        android:layout_below="@+id/textViewWelcomeAppName"
-        android:hint="@string/hint_login_email"/>
+        android:layout_marginTop="25dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/editTextUserNameLogin"
+            android:inputType="text"
+            android:hint="@string/hint_login_username" />
+
+    </android.support.design.widget.TextInputLayout>
 
 
-    <EditText
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="5dp"
-        android:id="@+id/editTextPasswordLogin"
-        android:layout_below="@+id/editTextEmailLogin"
-        android:hint="@string/hint_login_password"/>
+        android:layout_below="@+id/textInputLayoutUserName" >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/editTextPasswordLogin"
+            android:hint="@string/hint_login_password"/>
+
+    </android.support.design.widget.TextInputLayout>
+
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_below="@id/editTextPasswordLogin"
+        android:layout_below="@id/textInputLayoutPassword"
         android:text="@string/login_button"
         android:layout_width="250dp"
         android:layout_height="41dp"
@@ -76,6 +91,7 @@
         android:layout_below="@id/textViewWelcomeOr"
         android:layout_width="250dp"
         android:layout_height="41dp"
+        android:elevation="4dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/button_login_facebook" />
@@ -86,7 +102,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/primary_dark"
         android:fontFamily="sans-serif-thin"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:layout_marginTop="35dp"
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/loginFacebookButton"
@@ -98,8 +114,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/primary_dark"
         android:fontFamily="sans-serif"
-        android:textStyle="bold"
         android:textSize="18sp"
+        android:textStyle="bold"
         android:layout_marginLeft="5dp"
         android:clickable="true"
         android:layout_toRightOf="@+id/textViewCreateOrLogin"

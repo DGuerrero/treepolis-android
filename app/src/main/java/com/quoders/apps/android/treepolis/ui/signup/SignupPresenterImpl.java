@@ -1,16 +1,17 @@
-package com.quoders.apps.android.treepolis.signup;
+package com.quoders.apps.android.treepolis.ui.signup;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
 import com.quoders.apps.android.treepolis.R;
+import com.quoders.apps.android.treepolis.model.Constants;
+import com.quoders.apps.android.treepolis.ui.home.HomeActivity;
 
 /**
  * Created by davidguerrerodiaz on 19/04/15.
  */
 public class SignupPresenterImpl implements SignupPresenter, SignupInteractorImpl.SignupListener {
 
-    private static final String EMAIL_REGEX = "[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\\.[a-zA-Z]{2,4}";
 
     private SignupView          mView;
     private SignupInteractor    mInteractor;
@@ -38,7 +39,7 @@ public class SignupPresenterImpl implements SignupPresenter, SignupInteractorImp
         boolean result = true;
 
         //  Check valid email
-        if(!mView.getFieldEmail().matches(EMAIL_REGEX)) {
+        if(!mView.getFieldEmail().matches(Constants.REGEX_EMAIL)) {
             mView.setFieldEmailError(R.string.field_error_email_invalid);
             result = false;
         }
@@ -71,7 +72,8 @@ public class SignupPresenterImpl implements SignupPresenter, SignupInteractorImp
     @Override
     public void onSignupSuccess() {
         mView.stopProgressDialog();
-        mView.finishActivity(Activity.RESULT_OK);
+        mView.launchActivity(new Intent(mContext, HomeActivity.class));
+        mView.finishActivity();
     }
 
     @Override

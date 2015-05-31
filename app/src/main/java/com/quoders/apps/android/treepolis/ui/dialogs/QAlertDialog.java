@@ -1,4 +1,4 @@
-package com.quoders.apps.android.treepolis.dialogs;
+package com.quoders.apps.android.treepolis.ui.dialogs;
 
 import android.app.AlertDialog;
 import android.content.Context;

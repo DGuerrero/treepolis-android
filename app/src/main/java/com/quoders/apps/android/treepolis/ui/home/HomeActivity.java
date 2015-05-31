@@ -1,4 +1,4 @@
-package com.quoders.apps.android.treepolis.home;
+package com.quoders.apps.android.treepolis.ui.home;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,11 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.quoders.apps.android.treepolis.NavigationDrawerFragment;
 import com.quoders.apps.android.treepolis.R;
 
 
-public class HomeActivity extends ActionBarActivity
+public class HomeActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
@@ -26,9 +26,6 @@ public class HomeActivity extends ActionBarActivity
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
     private CharSequence mTitle;
 
     private ActionBarDrawerToggle mDrawerToggle;

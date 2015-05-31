@@ -12,11 +12,11 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".splash.SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".signup.SignupActivity"
+            android:name=".ui.signup.SignupActivity"
             android:label="@string/title_activity_signup" >
         </activity>
 
@@ -53,15 +53,20 @@
             android:value="ad075fa7a226a47bf635ee340227d7040ac7054d" />
 
         <activity
-            android:name=".welcome.WelcomeActivity"
+            android:name=".ui.welcome.WelcomeActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:label="@string/title_activity_home" >
 
         </activity>
     </application>

@@ -1,13 +1,14 @@
-package com.quoders.apps.android.treepolis.splash;
+package com.quoders.apps.android.treepolis.ui.splash;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.facebook.appevents.AppEventsLogger;
 import com.quoders.apps.android.treepolis.R;
 
 
-public class SplashActivity extends ActionBarActivity {
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

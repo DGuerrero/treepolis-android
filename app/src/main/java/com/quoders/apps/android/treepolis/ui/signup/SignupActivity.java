@@ -1,21 +1,22 @@
-package com.quoders.apps.android.treepolis.signup;
+package com.quoders.apps.android.treepolis.ui.signup;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
 import com.parse.ParseFacebookUtils;
 import com.quoders.apps.android.treepolis.R;
-import com.quoders.apps.android.treepolis.dialogs.QAlertDialog;
-import com.quoders.apps.android.treepolis.dialogs.QProgressDialog;
+import com.quoders.apps.android.treepolis.ui.dialogs.QAlertDialog;
+import com.quoders.apps.android.treepolis.ui.dialogs.QProgressDialog;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class SignupActivity extends ActionBarActivity implements SignupView {
+public class SignupActivity extends AppCompatActivity implements SignupView {
 
     public static final int REQUEST_ID_SIGNUP = 0x0001;
 
@@ -104,10 +105,21 @@ public class SignupActivity extends ActionBarActivity implements SignupView {
         mEtCreatePasswordConfirm.setError(getString(errorMessage));
     }
 
+
     @Override
     public void finishActivity(int resultCode) {
         setResult(resultCode);
         finish();
+    }
+
+    @Override
+    public void finishActivity() {
+        finish();
+    }
+
+    @Override
+    public void launchActivity(Intent intent) {
+        startActivity(intent);
     }
 
     @Override

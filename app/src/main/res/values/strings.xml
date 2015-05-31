@@ -11,13 +11,14 @@
     <!-- Welcome -->
     <string name="signup_welcome">Welcome to\nTreepolis</string>
     <string name="create_or_login_account">Don\'t have an account yet?</string>
-    <string name="create_account">Create account!</string>
+    <string name="create_account">Create!</string>
     <string name="hint_login_username">User Name</string>
     <string name="hint_login_email">Email</string>
     <string name="hint_login_password">Password</string>
     <string name="hint_login_confirm_password">Confirm Password</string>
     <string name="welcome_or">Or</string>
     <string name="login_button">Log In</string>
+    <string name="login_progress">Login...</string>
 
     <!-- Signup -->
     <string name="signup_title">Create Account</string>

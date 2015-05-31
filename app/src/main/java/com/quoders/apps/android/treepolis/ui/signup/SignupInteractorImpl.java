@@ -1,4 +1,4 @@
-package com.quoders.apps.android.treepolis.signup;
+package com.quoders.apps.android.treepolis.ui.signup;
 
 import android.content.Context;
 

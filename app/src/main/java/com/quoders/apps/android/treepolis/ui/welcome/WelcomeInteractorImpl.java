@@ -1,4 +1,4 @@
-package com.quoders.apps.android.treepolis.welcome;
+package com.quoders.apps.android.treepolis.ui.welcome;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,12 +17,17 @@ import java.util.Collection;
  */
 public class WelcomeInteractorImpl implements WelcomeInteractor {
 
-    private Context mContext;
+    private Context                     mContext;
+    private WelcomeInteractorListener   mListener;
 
-    public WelcomeInteractorImpl(Context context) {
+
+    public WelcomeInteractorImpl(Context context, WelcomeInteractorListener listener) {
         this.mContext = context;
+        this.mListener = listener;
     }
 
+
+    @Override
     public void loginWithFacebook() {
 
         Collection<String> permissions = Arrays.asList("public_profile");
@@ -39,5 +44,32 @@ public class WelcomeInteractorImpl implements WelcomeInteractor {
                 }
             }
         });
+    }
+
+
+    @Override
+    public void loginWithUserName(String username, String password) {
+
+        ParseUser.logInInBackground(username, password, new LogInCallback() {
+
+            public void done(ParseUser user, ParseException e) {
+
+                if (mListener != null) {
+
+                    if (user != null) {
+                        mListener.onLoginSuccessful();
+                    }
+                    else {
+                        mListener.onLoginError(e);
+                    }
+                }
+            }
+        });
+    }
+
+
+    public interface WelcomeInteractorListener {
+        void onLoginSuccessful();
+        void onLoginError(ParseException exception);
     }
 }
