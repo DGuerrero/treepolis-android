@@ -2,14 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.lampkicking.ipass.uiup.ythome.HomeActivity">
-
-    <include layout="@layout/toolbar"/>
 
     <!-- A DrawerLayout is intended to be used as the top-level content view using match_parent for both width and height to consume the full space available. -->
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
-        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
@@ -27,13 +25,27 @@
              android:layout_gravity="left" instead. -->
         <!-- The drawer is given a fixed width in dp and extends the full height of
              the container. -->
+        <!--
         <fragment android:id="@+id/navigation_drawer"
             android:layout_width="@dimen/navigation_drawer_width"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:name="com.quoders.apps.android.treepolis.ui.home.NavigationDrawerFragment"
             tools:layout="@layout/fragment_navigation_drawer" />
+        -->
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/navigation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/home_drawer_header"
+            app:menu="@menu/home_drawer"/>
+
 
     </android.support.v4.widget.DrawerLayout>
 
+    <include layout="@layout/toolbar"/>
+
+    
 </RelativeLayout>
