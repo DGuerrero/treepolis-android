@@ -11,14 +11,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name=".ui.splash.SplashActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".ui.signup.SignupActivity"
-            android:label="@string/title_activity_signup" >
-        </activity>
 
         <!-- Facebook Integration -->
         <activity
@@ -53,16 +45,22 @@
             android:value="ad075fa7a226a47bf635ee340227d7040ac7054d" />
 
         <activity
-            android:name=".ui.welcome.WelcomeActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-
+            android:name=".ui.splash.SplashActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+        </activity>
+        <activity
+            android:name=".ui.signup.SignupActivity"
+            android:label="@string/title_activity_signup" >
+        </activity>
+        <activity
+            android:name=".ui.welcome.WelcomeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".ui.home.HomeActivity"

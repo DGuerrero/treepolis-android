@@ -1,6 +1,6 @@
 package com.quoders.apps.android.treepolis.ui.home;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -19,8 +19,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.parse.ParseUser;
 import com.quoders.apps.android.treepolis.R;
+import com.quoders.apps.android.treepolis.ui.welcome.WelcomeActivity;
 
 
 public class HomeActivity extends AppCompatActivity
@@ -50,6 +53,18 @@ public class HomeActivity extends AppCompatActivity
         setupDrawerLayout();
 
         initToolbar();
+
+        setUserData();
+    }
+
+    private void setUserData() {
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+
+        if(currentUser != null) {
+            ((TextView)findViewById(R.id.textViewDrawerHeaderEmail)).setText(currentUser.getEmail());
+            ((TextView)findViewById(R.id.textViewDrawerHeaderUsername)).setText(currentUser.getUsername());
+        }
     }
 
 
@@ -72,8 +87,15 @@ public class HomeActivity extends AppCompatActivity
         view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
             @Override public boolean onNavigationItemSelected(MenuItem menuItem) {
-                Snackbar.make(content, menuItem.getTitle() + " pressed", Snackbar.LENGTH_LONG).show();
-                menuItem.setChecked(true);
+
+                if(menuItem.getItemId() == R.id.drawer_logout) {
+                    performUserLogout();
+                }
+                else {
+                    Snackbar.make(content, menuItem.getTitle() + " pressed", Snackbar.LENGTH_LONG).show();
+                    menuItem.setChecked(true);
+                }
+
                 mDrawerLayout.closeDrawers();
                 return true;
             }
@@ -106,6 +128,12 @@ public class HomeActivity extends AppCompatActivity
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
+    private void performUserLogout() {
+
+        ParseUser.logOut();
+        startActivity(new Intent(this, WelcomeActivity.class));
+        finish();
+    }
 
 
     @Override
@@ -115,15 +143,6 @@ public class HomeActivity extends AppCompatActivity
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
-    }
-
-
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-        }
     }
 
 
@@ -151,8 +170,6 @@ public class HomeActivity extends AppCompatActivity
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-
-
 
 
     @Override
@@ -205,12 +222,7 @@ public class HomeActivity extends AppCompatActivity
             return rootView;
         }
 
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((HomeActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
+
     }
 
 }

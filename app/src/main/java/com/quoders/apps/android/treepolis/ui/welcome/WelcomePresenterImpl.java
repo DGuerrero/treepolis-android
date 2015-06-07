@@ -64,6 +64,7 @@ public class WelcomePresenterImpl implements WelcomePresenter, WelcomeInteractor
     @Override
     public void onLoginError(ParseException exception) {
         mView.stopProgressDialog();
+        mView.showAlertDialog(R.string.login_error_title, getLoginErrorTextMessage(exception));
     }
 
 
@@ -83,5 +84,18 @@ public class WelcomePresenterImpl implements WelcomePresenter, WelcomeInteractor
         }
 
         return result;
+    }
+
+    int getLoginErrorTextMessage(ParseException e) {
+
+        int message = R.string.unknown_error;
+
+        switch (e.getCode()) {
+            case ParseException.OBJECT_NOT_FOUND:
+                message = R.string.login_error_user_not_found;
+                break;
+        }
+
+        return message;
     }
 }

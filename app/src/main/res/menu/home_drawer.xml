@@ -24,17 +24,13 @@
             android:id="@+id/drawer_home"
             android:checked="true"
             android:icon="@android:drawable/ic_menu_mylocation"
-            android:title="@string/abc_action_bar_home_description"/>
+            android:title="Option Test"/>
 
         <item
-            android:id="@+id/drawer_favourite"
+            android:id="@+id/drawer_logout"
             android:icon="@android:drawable/ic_menu_add"
-            android:title="@string/abc_action_mode_done"/>
+            android:title="@string/drawer_menu_option_logout"/>
 
-        <item
-            android:id="@+id/drawer_downloaded"
-            android:icon="@android:drawable/ic_menu_call"
-            android:title="@string/abc_searchview_description_clear"/>
 
     </group>
 </menu>
