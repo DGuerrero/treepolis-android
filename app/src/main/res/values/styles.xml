@@ -10,10 +10,10 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
 
         <!--   theme UI controls like checkboxes and text fields -->
-        <item name="colorAccent">@color/accent</item>
+        <item name="colorAccent">@color/primary_dark</item>
 
         <!--   theme primary text white -->
-        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/darker_gray</item>
 
         <item name="android:windowActionBar">false</item>
 

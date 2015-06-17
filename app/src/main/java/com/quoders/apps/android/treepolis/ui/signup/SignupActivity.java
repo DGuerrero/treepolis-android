@@ -2,8 +2,9 @@ package com.quoders.apps.android.treepolis.ui.signup;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
@@ -32,7 +33,7 @@ public class SignupActivity extends AppCompatActivity implements SignupView {
         mPresenter.onCreateAccountClick();
     }
 
-
+    ActionBar mActionBar;
     SignupPresenter mPresenter;
     QProgressDialog mProgressDialog;
     QAlertDialog mAlertDialog;
@@ -49,6 +50,12 @@ public class SignupActivity extends AppCompatActivity implements SignupView {
         mAlertDialog = new QAlertDialog(this);
     }
 
+
+    private void initToolbar() {
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        mActionBar = getSupportActionBar();
+    }
 
     @Override
     protected void onStop() {

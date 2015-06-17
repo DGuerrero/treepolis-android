@@ -23,8 +23,10 @@ android {
         applicationId "com.quoders.apps.android.treepolis"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.2"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -36,6 +38,10 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -45,5 +51,11 @@ dependencies {
     compile 'com.android.support:design:22.2.0'
     compile 'com.crashlytics.android:crashlytics:1.+'
     compile 'com.jakewharton:butterknife:6.1.0'
-    testCompile 'junit:junit:4.+'
+    compile 'com.google.android.gms:play-services-maps:7.5.0'
+    compile 'com.android.support:support-annotations:22.2.0'
+
+    // Testing-only dependencies
+    androidTestCompile 'com.android.support.test:runner:0.2'
+    androidTestCompile 'com.android.support.test:rules:0.2'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.1'
 }

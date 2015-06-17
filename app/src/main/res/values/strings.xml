@@ -47,5 +47,8 @@
     <string name="login_error_user_not_found">Please check user name and password and try again.</string>
     <string name="drawer_menu_option_logout">Logout</string>
 
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

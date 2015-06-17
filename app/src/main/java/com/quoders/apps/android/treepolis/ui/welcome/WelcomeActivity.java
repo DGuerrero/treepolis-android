@@ -2,8 +2,9 @@ package com.quoders.apps.android.treepolis.ui.welcome;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
@@ -32,6 +33,7 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeView {
     }
 
 
+    ActionBar mActionBar;
     WelcomePresenter mPresenter;
     QProgressDialog mProgressDialog;
     QAlertDialog mAlertDialog;
@@ -48,6 +50,15 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeView {
 
         mProgressDialog = new QProgressDialog(this);
         mAlertDialog = new QAlertDialog(this);
+
+        initToolbar();
+    }
+
+
+    private void initToolbar() {
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        mActionBar = getSupportActionBar();
     }
 
 
