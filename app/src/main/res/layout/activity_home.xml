@@ -18,7 +18,14 @@
              space available using match_parent in both dimensions. -->
         <FrameLayout android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+
+            <fragment
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="com.google.android.gms.maps.SupportMapFragment"/>
+        </FrameLayout>
 
 
         <android.support.design.widget.NavigationView

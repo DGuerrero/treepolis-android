@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -19,6 +18,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.ParseUser;
 import com.quoders.apps.android.treepolis.R;
 import com.quoders.apps.android.treepolis.ui.HomeMapFragment;
@@ -27,7 +32,10 @@ import com.quoders.apps.android.treepolis.ui.welcome.WelcomeActivity;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
-                    HomeMapFragment.OnFragmentInteractionListener {
+                    HomeMapFragment.OnFragmentInteractionListener, OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
+
+    private static final LatLng SYDNEY = new LatLng(-33.85704, 151.21522);
+    private static final int MAP_ZOOM_LEVEL_NORMAL = 14;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -39,6 +47,13 @@ public class HomeActivity extends AppCompatActivity
     private CharSequence mTitle;
     private ActionBarDrawerToggle mDrawerToggle;
     private ActionBar mActionBar;
+
+    /**
+     * The map. It is initialized when the map has been fully loaded and is ready to be used.
+     *
+     * @see #onMapReady(com.google.android.gms.maps.GoogleMap)
+     */
+    private GoogleMap mMap;
 
 
     @Override
@@ -61,10 +76,9 @@ public class HomeActivity extends AppCompatActivity
 
     private void setMapFragment() {
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, HomeMapFragment.newInstance("", ""))
-                .commit();
+        // Obtain the MapFragment and set the async listener to be notified when the map is ready.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
 
     private void setUserData() {
@@ -206,5 +220,30 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        // Map is ready to be used.
+        mMap = googleMap;
+
+        //  Enable user location layer
+        mMap.setMyLocationEnabled(true);
+
+        // Set the long click listener as a way to exit the map.
+        mMap.setOnMapLongClickListener(this);
+
+        // Add a marker with a title that is shown in its info window.
+        mMap.addMarker(new MarkerOptions().position(SYDNEY).title("Sydney Opera House"));
+
+        // Move the camera to show the marker.
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SYDNEY, MAP_ZOOM_LEVEL_NORMAL));
+        //mMap.moveCamera(CameraUpdateFactory.zoomTo(MAP_ZOOM_LEVEL_NORMAL));
+    }
+
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+        //  TODO
     }
 }
