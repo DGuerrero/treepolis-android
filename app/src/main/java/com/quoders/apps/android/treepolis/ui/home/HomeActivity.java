@@ -2,6 +2,7 @@ package com.quoders.apps.android.treepolis.ui.home;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -18,25 +19,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseUser;
 import com.quoders.apps.android.treepolis.R;
 import com.quoders.apps.android.treepolis.ui.HomeMapFragment;
-import com.quoders.apps.android.treepolis.ui.mapsmng.GoogleMapsMng;
+import com.quoders.apps.android.treepolis.ui.maps.GoogleMapsMng;
+import com.quoders.apps.android.treepolis.ui.maps.LocationMng;
 import com.quoders.apps.android.treepolis.ui.welcome.WelcomeActivity;
 
 
-public class HomeActivity extends AppCompatActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks,
-                    HomeMapFragment.OnFragmentInteractionListener,
-                    GoogleMap.OnMapLongClickListener, GoogleApiClient.ConnectionCallbacks,
-                    GoogleApiClient.OnConnectionFailedListener {
-
+public class HomeActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks,
+                    HomeMapFragment.OnFragmentInteractionListener {
 
 
     /**
@@ -50,12 +43,8 @@ public class HomeActivity extends AppCompatActivity
     private ActionBarDrawerToggle mDrawerToggle;
     private ActionBar mActionBar;
 
-    /**
-     * Provides the entry point to Google Play services.
-     */
-    protected GoogleApiClient mGoogleApiClient;
-
     private GoogleMapsMng mMapMng;
+    private LocationMng mLocationMng;
 
 
     @Override
@@ -75,19 +64,14 @@ public class HomeActivity extends AppCompatActivity
 
         setMapFragment();
 
-        buildGoogleApiClient();
+        setLocationManager();
     }
 
-    /**
-     * Builds a GoogleApiClient. Uses the addApi() method to request the LocationServices API.
-     */
-    protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
+    private void setLocationManager() {
+        mLocationMng = new LocationMng(this, mMapMng);
     }
+
+
 
     private void setMapFragment() {
 
@@ -240,23 +224,4 @@ public class HomeActivity extends AppCompatActivity
     }
 
 
-    @Override
-    public void onMapLongClick(LatLng latLng) {
-        //  TODO
-    }
-
-    @Override
-    public void onConnected(Bundle bundle) {
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-
-    }
 }
