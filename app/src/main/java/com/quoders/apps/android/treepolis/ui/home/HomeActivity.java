@@ -2,7 +2,6 @@ package com.quoders.apps.android.treepolis.ui.home;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -67,10 +66,27 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
         setLocationManager();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(mLocationMng != null) {
+            mLocationMng.startLocationService();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if(mLocationMng != null) {
+            mLocationMng.stopLocationService();
+        }
+    }
+
     private void setLocationManager() {
         mLocationMng = new LocationMng(this, mMapMng);
     }
-
 
 
     private void setMapFragment() {
