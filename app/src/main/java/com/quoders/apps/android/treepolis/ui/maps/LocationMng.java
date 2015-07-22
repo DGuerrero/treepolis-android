@@ -18,14 +18,17 @@ public class LocationMng implements GoogleApiClient.ConnectionCallbacks,
 
     private LocationManagerCallback mCallback;
 
-    protected GoogleApiClient mGoogleApiClient;
-    protected Location mLastLocation;
     LocationRequest mLocationRequest;
+    protected GoogleApiClient mGoogleApiClient;
+    protected Location mCurrentLocation;
+    private boolean mRequestingLocationUpdates;
 
 
-    public LocationMng(Context context, LocationManagerCallback callback) {
+
+    public LocationMng(Context context, boolean requestUpdates,  LocationManagerCallback callback) {
 
         this.mCallback = callback;
+        this.mRequestingLocationUpdates = requestUpdates;
 
         buildGoogleApiClient(context);
     }
@@ -62,10 +65,17 @@ public class LocationMng implements GoogleApiClient.ConnectionCallbacks,
     @Override
     public void onConnected(Bundle bundle) {
 
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        //  Get the last location
+        mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
-        if (mLastLocation != null) {
-            mCallback.onLocationUpdate(mLastLocation);
+        if (mCurrentLocation != null) {
+            mCallback.onLocationUpdate(mCurrentLocation);
+        }
+
+        //  Request location updates
+        if (mRequestingLocationUpdates) {
+            createLocationRequest();
+            startLocationUpdates();
         }
     }
 
@@ -83,18 +93,28 @@ public class LocationMng implements GoogleApiClient.ConnectionCallbacks,
     }
 
     public Location getLastLocation() {
-        return mLastLocation;
+        return mCurrentLocation;
     }
 
     @Override
     public void onLocationChanged(Location location) {
+
+        mCurrentLocation = location;
+
+        //  Report the change to listeners
         if(mCallback != null) {
             mCallback.onLocationUpdate(location);
         }
     }
 
     public void stopLocationUpdates() {
+        mRequestingLocationUpdates = false;
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+    }
+
+    protected void startLocationUpdates() {
+        mRequestingLocationUpdates = true;
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
     }
 
     public interface LocationManagerCallback {

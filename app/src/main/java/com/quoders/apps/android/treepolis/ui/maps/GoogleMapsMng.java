@@ -17,6 +17,7 @@ public class GoogleMapsMng implements OnMapReadyCallback, GoogleMap.OnMapLongCli
     private static final int MAP_ZOOM_LEVEL_NORMAL = 14;
 
     private Context mContext;
+    private boolean mFirstLocationUpdated = false;
 
 
     /**
@@ -52,13 +53,17 @@ public class GoogleMapsMng implements OnMapReadyCallback, GoogleMap.OnMapLongCli
     @Override
     public void onLocationUpdate(Location location) {
 
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        if(!mFirstLocationUpdated) {
+            mFirstLocationUpdated = true;
+            
+            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-        // Add a marker with a title that is shown in its info window.
-        mMap.addMarker(new MarkerOptions().position(latLng));
+            // Add a marker with a title that is shown in its info window.
+            mMap.addMarker(new MarkerOptions().position(latLng));
 
-        // Move the camera to show the marker.
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, MAP_ZOOM_LEVEL_NORMAL));
+            // Move the camera to show the marker.
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, MAP_ZOOM_LEVEL_NORMAL));
+        }
     }
 
     @Override

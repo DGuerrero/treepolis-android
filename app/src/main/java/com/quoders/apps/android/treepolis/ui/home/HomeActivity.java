@@ -85,7 +85,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
     }
 
     private void setLocationManager() {
-        mLocationMng = new LocationMng(this, mMapMng);
+        mLocationMng = new LocationMng(this, true, mMapMng);
     }
 
 
