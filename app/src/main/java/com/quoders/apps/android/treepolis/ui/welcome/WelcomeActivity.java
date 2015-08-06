@@ -13,14 +13,14 @@ import com.quoders.apps.android.treepolis.R;
 import com.quoders.apps.android.treepolis.ui.dialogs.QAlertDialog;
 import com.quoders.apps.android.treepolis.ui.dialogs.QProgressDialog;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 public class WelcomeActivity extends AppCompatActivity implements WelcomeView {
 
-    @InjectView(R.id.editTextUserNameLogin)     EditText mEtUserName;
-    @InjectView(R.id.editTextPasswordLogin)     EditText mEtUserPassword;
+    @Bind(R.id.editTextUserNameLogin)     EditText mEtUserName;
+    @Bind(R.id.editTextPasswordLogin)     EditText mEtUserPassword;
 
     @OnClick(R.id.loginButton)
     public void loginButtonClick(View view) {
@@ -44,7 +44,7 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         mPresenter = new WelcomePresenterImpl(this);
 

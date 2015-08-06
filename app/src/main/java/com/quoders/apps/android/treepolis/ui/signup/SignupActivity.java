@@ -13,8 +13,8 @@ import com.quoders.apps.android.treepolis.R;
 import com.quoders.apps.android.treepolis.ui.dialogs.QAlertDialog;
 import com.quoders.apps.android.treepolis.ui.dialogs.QProgressDialog;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 public class SignupActivity extends AppCompatActivity implements SignupView {
@@ -22,10 +22,10 @@ public class SignupActivity extends AppCompatActivity implements SignupView {
     public static final int REQUEST_ID_SIGNUP = 0x0001;
 
 
-    @InjectView(R.id.editTextCreateUserName)    EditText mEtCreateUserName;
-    @InjectView(R.id.editTextCreateEmail)       EditText mEtCreateEmail;
-    @InjectView(R.id.editTextCreatePassword)    EditText mEtCreatePassword;
-    @InjectView(R.id.editTextPasswordConfirm)   EditText mEtCreatePasswordConfirm;
+    @Bind(R.id.editTextCreateUserName)    EditText mEtCreateUserName;
+    @Bind(R.id.editTextCreateEmail)       EditText mEtCreateEmail;
+    @Bind(R.id.editTextCreatePassword)    EditText mEtCreatePassword;
+    @Bind(R.id.editTextPasswordConfirm)   EditText mEtCreatePasswordConfirm;
 
 
     @OnClick(R.id.buttonSignUp)
@@ -43,7 +43,7 @@ public class SignupActivity extends AppCompatActivity implements SignupView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         mPresenter = new SignupPresenterImpl(this);
         mProgressDialog = new QProgressDialog(this);
