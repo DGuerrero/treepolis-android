@@ -3,6 +3,7 @@ package com.quoders.apps.android.treepolis.ui.signup;
 import android.content.Context;
 import android.content.Intent;
 
+import com.parse.ParseException;
 import com.quoders.apps.android.treepolis.R;
 import com.quoders.apps.android.treepolis.model.Constants;
 import com.quoders.apps.android.treepolis.ui.home.HomeActivity;
@@ -77,8 +78,29 @@ public class SignupPresenterImpl implements SignupPresenter, SignupInteractorImp
     }
 
     @Override
-    public void onSignupError(String errorMessage) {
+    public void onSignupError(int errorMessage) {
         mView.stopProgressDialog();
-        mView.showAlertDialog(mContext.getString(R.string.signup_error), errorMessage);
+        mView.showAlertDialog(mContext.getString(R.string.signup_error), getSignUpErrorMessage(errorMessage));
     }
+
+
+    private String getSignUpErrorMessage(int code) {
+
+        String errorMessage = mContext.getString(R.string.signup_error_unknown);
+
+        switch (code) {
+            case ParseException.EMAIL_TAKEN:
+                errorMessage = mContext.getString(R.string.signup_error_email_taken);
+                break;
+            case ParseException.INVALID_EMAIL_ADDRESS:
+                errorMessage = mContext.getString(R.string.signup_error_email_invalid);
+                break;
+            case ParseException.USERNAME_TAKEN:
+                errorMessage = mContext.getString(R.string.signup_error_username_taken);
+                break;
+        }
+
+        return errorMessage;
+    }
+
 }

@@ -5,19 +5,16 @@ import android.content.Context;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
-import com.quoders.apps.android.treepolis.R;
 
 /**
  * Created by davidguerrerodiaz on 19/04/15.
  */
 public class SignupInteractorImpl implements SignupInteractor {
 
-    private Context mContext;
     private SignupListener mListener;
 
     public SignupInteractorImpl(Context context, SignupListener listener) {
 
-        this.mContext = context;
         this.mListener = listener;
     }
 
@@ -39,7 +36,7 @@ public class SignupInteractorImpl implements SignupInteractor {
                 } else {
 
                     if(mListener != null) {
-                        mListener.onSignupError(getSignUpErrorMessage(e.getCode()));
+                        mListener.onSignupError(e.getCode());
                     }
                 }
             }
@@ -47,31 +44,11 @@ public class SignupInteractorImpl implements SignupInteractor {
     }
 
 
-    private String getSignUpErrorMessage(int code) {
-
-        String errorMessage = mContext.getString(R.string.signup_error_unknown);
-
-        switch (code) {
-            case ParseException.EMAIL_TAKEN:
-                errorMessage = mContext.getString(R.string.signup_error_email_taken);
-                break;
-            case ParseException.INVALID_EMAIL_ADDRESS:
-                errorMessage = mContext.getString(R.string.signup_error_email_invalid);
-                break;
-            case ParseException.USERNAME_TAKEN:
-                errorMessage = mContext.getString(R.string.signup_error_username_taken);
-                break;
-        }
-
-        return errorMessage;
-    }
-
-
 
     public interface SignupListener {
 
         void  onSignupSuccess();
-        void onSignupError(String errorCode);
+        void onSignupError(int errorCode);
 
     }
 }
