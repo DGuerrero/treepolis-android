@@ -1,13 +1,11 @@
 package com.quoders.apps.android.treepolis.ui.maps;
 
-import android.content.Context;
 import android.location.Location;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
  * Created by davidguerrero on 07/07/15.
@@ -16,7 +14,6 @@ public class GoogleMapsMng implements OnMapReadyCallback, GoogleMap.OnMapLongCli
 
     private static final int MAP_ZOOM_LEVEL_NORMAL = 14;
 
-    private Context mContext;
     private boolean mFirstLocationUpdated = false;
 
 
@@ -27,10 +24,6 @@ public class GoogleMapsMng implements OnMapReadyCallback, GoogleMap.OnMapLongCli
      */
     private GoogleMap mMap;
 
-
-    public GoogleMapsMng(Context context) {
-        this.mContext = context;
-    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -59,7 +52,7 @@ public class GoogleMapsMng implements OnMapReadyCallback, GoogleMap.OnMapLongCli
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
             // Add a marker with a title that is shown in its info window.
-            mMap.addMarker(new MarkerOptions().position(latLng));
+            //mMap.addMarker(new MarkerOptions().position(latLng));
 
             // Move the camera to show the marker.
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, MAP_ZOOM_LEVEL_NORMAL));
