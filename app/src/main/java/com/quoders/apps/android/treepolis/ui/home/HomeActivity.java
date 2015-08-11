@@ -26,6 +26,8 @@ import com.quoders.apps.android.treepolis.ui.maps.GoogleMapsMng;
 import com.quoders.apps.android.treepolis.ui.maps.LocationMng;
 import com.quoders.apps.android.treepolis.ui.welcome.WelcomeActivity;
 
+import butterknife.OnClick;
+
 
 public class HomeActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks,
                     HomeMapFragment.OnFragmentInteractionListener {
@@ -34,7 +36,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
-    //private NavigationDrawerFragment mNavigationDrawerFragment;
     private DrawerLayout mDrawerLayout;
     private View content;
 
@@ -44,6 +45,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
 
     private GoogleMapsMng mMapMng;
     private LocationMng mLocationMng;
+
+    private HomePresenter mPresenter;
+
+    @OnClick(R.id.buttonCheckTree)
+    public void checkTreeButtonClick(View view) {
+        mPresenter.onCheckTree();
+    }
 
 
     @Override
@@ -91,7 +99,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
 
     private void setMapFragment() {
 
-        mMapMng = new GoogleMapsMng(this);
+        mMapMng = new GoogleMapsMng();
 
         // Obtain the MapFragment and set the async listener to be notified when the map is ready.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);

@@ -16,16 +16,50 @@
 
         <!-- As the main content view, the view below consumes the entire
              space available using match_parent in both dimensions. -->
-        <FrameLayout android:id="@+id/container"
+        <LinearLayout android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
 
             <fragment
                 android:id="@+id/map"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".55"
                 android:name="com.google.android.gms.maps.SupportMapFragment"/>
-        </FrameLayout>
+
+            <RelativeLayout
+                android:background="@color/primary_dark"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".45">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_standard_title"
+                    android:textColor="@android:color/white"
+                    android:fontFamily="sans-serif-thin"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:gravity="center"
+                    android:text="@string/home_no_trees_around"/>
+
+                <Button
+                    android:id="@+id/buttonCheckTree"
+                    android:layout_width="@dimen/button_standard_width"
+                    android:layout_height="@dimen/button_standard_height"
+                    style="@style/Treepolis.Button"
+                    android:text="@string/button_checkin_tree"
+                    android:layout_marginBottom="10dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
 
         <android.support.design.widget.NavigationView

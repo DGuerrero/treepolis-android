@@ -47,8 +47,8 @@
     <string name="login_error_user_not_found">Please check user name and password and try again.</string>
     <string name="drawer_menu_option_logout">Logout</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button_checkin_tree">Check Tree</string>
+    <string name="home_no_trees_around">No trees found around you. Be the first in check a new tree here!</string>
 
 
 </resources>
