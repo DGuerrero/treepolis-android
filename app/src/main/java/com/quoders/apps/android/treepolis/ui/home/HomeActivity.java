@@ -26,6 +26,7 @@ import com.quoders.apps.android.treepolis.ui.maps.GoogleMapsMng;
 import com.quoders.apps.android.treepolis.ui.maps.LocationMng;
 import com.quoders.apps.android.treepolis.ui.welcome.WelcomeActivity;
 
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
@@ -58,6 +59,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        ButterKnife.bind(this);
+
+        mPresenter = new HomePresenterImpl(this);
 
         mTitle = getTitle();
 
