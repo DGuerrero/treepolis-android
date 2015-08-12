@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.quoders.apps.android.treepolis">
+    package="com.quoders.apps.android.treepolis" >
+
+    <uses-sdk tools:overrideLibrary="android.support.test.uiautomator.v18" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
-    <uses-sdk tools:overrideLibrary="android.support.test.uiautomator.v18"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
-        android:required="true"/>
+        android:required="true" />
 
     <application
         android:name=".TreepolisApplication"
@@ -51,7 +51,6 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="com.crashlytics.ApiKey"
             android:value="ad075fa7a226a47bf635ee340227d7040ac7054d" />
@@ -77,14 +76,17 @@
         <activity
             android:name=".ui.home.HomeActivity"
             android:label="@string/title_activity_home"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
-
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAN2WjLS2oWR9BiNJURWiCNxDnCDjP4Vo0"/>
+            android:value="AIzaSyAN2WjLS2oWR9BiNJURWiCNxDnCDjP4Vo0" />
 
+        <activity
+            android:name=".ui.checkin.CheckinTreeActivity"
+            android:label="@string/title_activity_checkin_tree" >
+        </activity>
     </application>
 
 </manifest>
