@@ -22,18 +22,18 @@
             android:orientation="vertical"
             android:weightSum="1">
 
-            <fragment
+            q<fragment
                 android:id="@+id/map"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight=".55"
+                android:layout_weight=".5"
                 android:name="com.google.android.gms.maps.SupportMapFragment"/>
 
             <RelativeLayout
                 android:background="@color/primary_dark"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight=".45">
+                android:layout_weight=".5">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -41,12 +41,21 @@
                     android:textSize="@dimen/text_standard_title"
                     android:textColor="@android:color/white"
                     android:fontFamily="sans-serif-thin"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="60dp"
                     android:layout_marginRight="30dp"
                     android:layout_marginLeft="30dp"
                     android:gravity="center"
                     android:text="@string/home_no_trees_around"/>
 
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fabCheckin"
+                    style="@style/FabStyle"
+                    android:layout_margin="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"/>
+
+                <!--
                 <Button
                     android:id="@+id/buttonCheckTree"
                     android:layout_width="@dimen/button_standard_width"
@@ -54,8 +63,8 @@
                     style="@style/Treepolis.Button"
                     android:text="@string/button_checkin_tree"
                     android:layout_marginBottom="10dp"
-                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true" />
+                -->
 
             </RelativeLayout>
 

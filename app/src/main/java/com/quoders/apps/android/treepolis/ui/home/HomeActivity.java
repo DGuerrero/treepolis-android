@@ -12,8 +12,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -33,7 +31,6 @@ import butterknife.OnClick;
 public class HomeActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks,
                     HomeMapFragment.OnFragmentInteractionListener {
 
-
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -49,7 +46,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
 
     private HomePresenter mPresenter;
 
-    @OnClick(R.id.buttonCheckTree)
+    @OnClick(R.id.fabCheckin)
     public void checkTreeButtonClick(View view) {
         mPresenter.onCheckTree();
     }
@@ -201,19 +198,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
         */
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.home, menu);
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
-
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -230,7 +214,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
+        // Pass the event to ActionBarDrawerToggle, if it returnsq
         // true, then it has handled the app icon touch event
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;

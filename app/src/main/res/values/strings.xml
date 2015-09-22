@@ -49,10 +49,9 @@
 
     <string name="button_checkin_tree">Check Tree</string>
     <string name="home_no_trees_around">No trees found around you. Be the first in check a new tree here!</string>
-    <string name="title_activity_checkin_tree">CheckinTreeActivity</string>
 
     <!-- Check in tree -->
     <string name="submit_tree">Submit</string>
-
+    <string name="title_activity_checkin_tree">Check in</string>
 
 </resources>

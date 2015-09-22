@@ -85,7 +85,7 @@
 
         <activity
             android:name=".ui.checkin.CheckinTreeActivity"
-            android:label="@string/title_activity_checkin_tree" >
+            android:label="@string/title_activity_checkin_tree">
         </activity>
     </application>
 
