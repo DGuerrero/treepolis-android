@@ -1,12 +1,8 @@
 package com.quoders.apps.android.treepolis.ui.welcome;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 
 import com.parse.ParseException;
-import com.quoders.apps.android.treepolis.R;
-import com.quoders.apps.android.treepolis.ui.home.HomeActivity;
 import com.quoders.apps.android.treepolis.ui.signup.SignupActivity;
 
 /**
@@ -16,86 +12,64 @@ public class WelcomePresenterImpl implements WelcomePresenter, WelcomeInteractor
 
     private WelcomeView mView;
     private WelcomeInteractor mInteractor;
-    private Context mContext;
 
 
     public WelcomePresenterImpl(WelcomeView welcomeView) {
 
         this.mView = welcomeView;
-        this.mInteractor = new WelcomeInteractorImpl((Activity)welcomeView, this);
-        this.mContext = (Context)welcomeView;
+        this.mInteractor = new WelcomeInteractorImpl((Activity) welcomeView, this);
     }
-
 
     @Override
     public void onCreateAccountClick() {
-
-        mView.launchActivity(new Intent((Context)mView, SignupActivity.class));
+        mView.LaunchSignupActivity();
     }
-
 
     @Override
     public void onActivityResultCalled(int requestCode, int result) {
 
-        if(requestCode == SignupActivity.REQUEST_ID_SIGNUP && result == Activity.RESULT_OK) {
-            mView.launchActivity(new Intent((Context)mView, HomeActivity.class));
+        if (requestCode == SignupActivity.REQUEST_ID_SIGNUP && result == Activity.RESULT_OK) {
+            mView.launchHomeActivity();
         }
     }
-
 
     @Override
     public void onLoginClick() {
 
-        if(ValidateLoginFields()) {
-            mView.showProgressDialog(R.string.login_progress);
+        if (ValidateLoginFields()) {
+            mView.showProgressDialogLogin();
             mInteractor.loginWithUserName(mView.getUsernameFieldText(), mView.getPasswordFieldText());
         }
     }
 
-
     @Override
     public void onLoginSuccessful() {
         mView.stopProgressDialog();
-        mView.launchActivity(new Intent(mContext, HomeActivity.class));
+        mView.launchHomeActivity();
         mView.closeActivity();
     }
-
 
     @Override
     public void onLoginError(ParseException exception) {
         mView.stopProgressDialog();
-        mView.showAlertDialog(R.string.login_error_title, getLoginErrorTextMessage(exception));
+        mView.showLoginErrorAlertDialog();
     }
-
 
     private boolean ValidateLoginFields() {
 
         boolean result = true;
 
         //  Check empty fields
-        if(mView.getUsernameFieldText().isEmpty()) {
-            mView.setFieldUsernameError(R.string.field_error_empty);
+        if (mView.getUsernameFieldText().isEmpty()) {
+            mView.setUsernameFieldEmptyError();
             result = false;
         }
 
-        if(mView.getPasswordFieldText().isEmpty()) {
-            mView.setFieldPasswordError(R.string.field_error_empty);
+        if (mView.getPasswordFieldText().isEmpty()) {
+            mView.setPasswordFieldEmptyError();
             result = false;
         }
 
         return result;
-    }
-
-    int getLoginErrorTextMessage(ParseException e) {
-
-        int message = R.string.unknown_error;
-
-        switch (e.getCode()) {
-            case ParseException.OBJECT_NOT_FOUND:
-                message = R.string.login_error_user_not_found;
-                break;
-        }
-
-        return message;
     }
 }

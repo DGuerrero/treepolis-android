@@ -12,6 +12,8 @@ import com.parse.ParseFacebookUtils;
 import com.quoders.apps.android.treepolis.R;
 import com.quoders.apps.android.treepolis.ui.dialogs.QAlertDialog;
 import com.quoders.apps.android.treepolis.ui.dialogs.QProgressDialog;
+import com.quoders.apps.android.treepolis.ui.home.HomeActivity;
+import com.quoders.apps.android.treepolis.ui.signup.SignupActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -85,13 +87,13 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeView {
     }
 
     @Override
-    public void launchActivityForResult(Intent intent, int requestCode) {
-        startActivityForResult(intent, requestCode);
+    public void launchHomeActivity() {
+        startActivity(new Intent(this, HomeActivity.class));
     }
 
     @Override
-    public void launchActivity(Intent intent) {
-        startActivity(intent);
+    public void LaunchSignupActivity() {
+        startActivity(new Intent(this, SignupActivity.class));
     }
 
     @Override
@@ -110,27 +112,9 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeView {
     }
 
     @Override
-    public void setFieldUsernameError(int errorMessage) {
-        mEtUserName.setError(getString(errorMessage));
-    }
-
-    @Override
-    public void setFieldPasswordError(int errorMessage) {
-        mEtUserPassword.setError(getString(errorMessage));
-    }
-
-    @Override
-    public void showAlertDialog(int title, int message) {
-        if(mAlertDialog != null) {
-            mAlertDialog.showDialogNeutral(getString(title), getString(message),
-                    getString(R.string.dialog_button_ok), null);
-        }
-    }
-
-    @Override
-    public void showProgressDialog(int message) {
+    public void showProgressDialogLogin() {
         if(mProgressDialog != null) {
-            mProgressDialog.show(getString(message), false);
+            mProgressDialog.show(getString(R.string.login_progress), false);
         }
     }
 
@@ -142,9 +126,21 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeView {
     }
 
     @Override
-    public void stopAlertDialog() {
+    public void showLoginErrorAlertDialog() {
         if(mAlertDialog != null) {
-            mAlertDialog.dismissDialog();
+            mAlertDialog.showDialogNeutral(getString(R.string.login_error_title),
+                    getString(R.string.login_error_user_not_found),
+                    getString(R.string.dialog_button_ok), null);
         }
+    }
+
+    @Override
+    public void setUsernameFieldEmptyError() {
+        mEtUserName.setError(getString(R.string.field_error_empty));
+    }
+
+    @Override
+    public void setPasswordFieldEmptyError() {
+        mEtUserPassword.setError(getString(R.string.field_error_empty));
     }
 }
