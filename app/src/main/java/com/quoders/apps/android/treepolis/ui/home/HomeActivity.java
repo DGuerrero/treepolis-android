@@ -1,11 +1,15 @@
 package com.quoders.apps.android.treepolis.ui.home;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -14,7 +18,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.google.android.gms.maps.SupportMapFragment;
 import com.parse.ParseUser;
@@ -30,6 +33,8 @@ import butterknife.OnClick;
 
 public class HomeActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks,
                     HomeMapFragment.OnFragmentInteractionListener {
+
+    private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 0x000001;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -80,8 +85,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
         super.onStart();
 
         if(mLocationMng != null) {
-            mLocationMng.startLocationService();
+
+            if(doWeHaveLocationPermission()) {
+                mLocationMng.startLocationService();
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+            }
         }
+    }
+
+    private boolean doWeHaveLocationPermission() {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
@@ -112,8 +129,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
         ParseUser currentUser = ParseUser.getCurrentUser();
 
         if(currentUser != null) {
-            ((TextView)findViewById(R.id.textViewDrawerHeaderEmail)).setText(currentUser.getEmail());
-            ((TextView)findViewById(R.id.textViewDrawerHeaderUsername)).setText(currentUser.getUsername());
+            //((TextView)findViewById(R.id.textViewDrawerHeaderEmail)).setText(currentUser.getEmail());
+            //((TextView)findViewById(R.id.textViewDrawerHeaderUsername)).setText(currentUser.getUsername());
         }
     }
 
@@ -235,5 +252,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
 
     }
 
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mLocationMng.startLocationService();
+                } else {
+                    mLocationMng.stopLocationService();
+                }
+                break;
+        }
+    }
 }

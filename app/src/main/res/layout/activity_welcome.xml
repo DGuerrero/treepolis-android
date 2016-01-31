@@ -8,8 +8,6 @@
 
     <TextView
         android:id="@+id/textViewWelcomeAppName"
-        android:textColor="@color/primary_dark"
-        android:fontFamily="sans-serif-thin"
         android:layout_below="@+id/toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,6 +32,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textColorHighlight="@android:color/white"
             android:id="@+id/editTextUserNameLogin"
             android:inputType="text"
             android:hint="@string/hint_login_username" />
@@ -71,7 +72,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/button_login" />
+        android:textColor="@android:color/white"
+        android:background="@color/primary" />
 
     <TextView
         android:id="@+id/textViewWelcomeOr"

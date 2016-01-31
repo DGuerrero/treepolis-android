@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.lampkicking.ipass.uiup.ythome.HomeActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <include layout="@layout/toolbar"/>
 
@@ -22,15 +21,15 @@
             android:orientation="vertical"
             android:weightSum="1">
 
-            q<fragment
+            <fragment
                 android:id="@+id/map"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight=".5"
-                android:name="com.google.android.gms.maps.SupportMapFragment"/>
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                tools:layout="@layout/fragment_map"/>
 
             <RelativeLayout
-                android:background="@color/primary_dark"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight=".5">
@@ -39,8 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_standard_title"
-                    android:textColor="@android:color/white"
-                    android:fontFamily="sans-serif-thin"
+                    android:textColor="@color/primary_dark"
                     android:layout_marginTop="60dp"
                     android:layout_marginRight="30dp"
                     android:layout_marginLeft="30dp"
@@ -55,16 +53,6 @@
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"/>
 
-                <!--
-                <Button
-                    android:id="@+id/buttonCheckTree"
-                    android:layout_width="@dimen/button_standard_width"
-                    android:layout_height="@dimen/button_standard_height"
-                    style="@style/Treepolis.Button"
-                    android:text="@string/button_checkin_tree"
-                    android:layout_marginBottom="10dp"
-                    android:layout_centerHorizontal="true" />
-                -->
 
             </RelativeLayout>
 

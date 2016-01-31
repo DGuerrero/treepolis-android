@@ -1,47 +1,69 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayoutCheckinTreeRoot"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/primary_dark"
-    tools:context="com.quoders.apps.android.treepolis.ui.checkin.CheckinTreeActivity">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/relativeLayoutCheckinTreeRoot"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.quoders.apps.android.treepolis.ui.checkin.CheckinTreeActivity">
 
     <include layout="@layout/toolbar"/>
 
     <TextView
         android:id="@+id/textViewTreePicsTitle"
         android:text="@string/checkTreePicsTitle"
-        android:layout_margin="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
         android:textSize="@dimen/text_standard_subtitle"
-        android:textColor="@android:color/white"
-        android:fontFamily="sans-serif-thin"
+        android:textColor="@color/primary_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/toolbar"/>
-
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:weightSum="1"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/textViewTreePicsTitle">
 
-        <ImageView
-            android:id="@+id/imageViewTreePic1"
-            android:src="@drawable/ic_tree"
-            android:layout_margin="5dp"
-            android:layout_weight=".5"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
+        <com.quoders.apps.android.treepolis.ui.widgets.CircleButton
+            android:id="@+id/circleButtonTreePhoto"
+            android:onClick="onTakePhotoClick"
+            android:clickable="true"
+            android:layout_margin="10dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:drawableTop="@drawable/ic_tree"
+            android:drawablePadding="10dp"
+            android:background="@drawable/green_circle_background"
+             />
 
-        <ImageView
-            android:id="@+id/imageViewTreePic2"
-            android:layout_margin="5dp"
-            android:layout_weight=".5"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
+        <com.quoders.apps.android.treepolis.ui.widgets.CircleButton
+            android:id="@+id/circleButtonLeafPhoto"
+            android:onClick="onTakePhotoClick"
+            android:clickable="true"
+            android:layout_margin="10dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:drawableTop="@drawable/ic_leaf"
+            android:drawablePadding="10dp"
+            android:background="@drawable/green_circle_background"
+            />
+
+        <com.quoders.apps.android.treepolis.ui.widgets.CircleButton
+            android:id="@+id/circleButtonFruitPhoto"
+            android:onClick="onTakePhotoClick"
+            android:clickable="true"
+            android:layout_margin="10dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:drawableTop="@drawable/ic_fruit"
+            android:drawablePadding="10dp"
+            android:background="@drawable/green_circle_background"
+            />
 
     </LinearLayout>
 

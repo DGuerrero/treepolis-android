@@ -53,6 +53,8 @@
     <!-- Check in tree -->
     <string name="submit_tree">Submit</string>
     <string name="title_activity_checkin_tree">Check in</string>
-    <string name="checkTreePicsTitle">Pictures of the tree:</string>
+    <string name="checkTreePicsTitle">Tap to add pictures of the tree, leaf and fruit</string>
+    <string name="dialog_title_error">Error</string>
+    <string name="dialog_message_error_taking_picture">Error taking the picture.</string>
 
 </resources>
