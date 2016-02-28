@@ -1,4 +1,4 @@
-package com.quoders.apps.android.treepolis.model.eventbus;
+package com.quoders.apps.android.treepolis.domain.eventbus;
 
 /**
  * Created by davidguerrero on 14/05/15.

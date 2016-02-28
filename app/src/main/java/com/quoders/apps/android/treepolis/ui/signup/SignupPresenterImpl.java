@@ -5,7 +5,7 @@ import android.content.Intent;
 
 import com.parse.ParseException;
 import com.quoders.apps.android.treepolis.R;
-import com.quoders.apps.android.treepolis.model.Constants;
+import com.quoders.apps.android.treepolis.model.TreepolisConsts;
 import com.quoders.apps.android.treepolis.ui.home.HomeActivity;
 
 /**
@@ -40,7 +40,7 @@ public class SignupPresenterImpl implements SignupPresenter, SignupInteractorImp
         boolean result = true;
 
         //  Check valid email
-        if(!mView.getFieldEmail().matches(Constants.REGEX_EMAIL)) {
+        if(!mView.getFieldEmail().matches(TreepolisConsts.REGEX_EMAIL)) {
             mView.setFieldEmailError(R.string.field_error_email_invalid);
             result = false;
         }

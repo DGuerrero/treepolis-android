@@ -1,4 +1,4 @@
-package com.quoders.apps.android.treepolis.model.eventbus;
+package com.quoders.apps.android.treepolis.domain.eventbus;
 
 import android.os.Handler;
 import android.os.Looper;

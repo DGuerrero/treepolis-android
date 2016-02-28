@@ -15,10 +15,10 @@ import java.util.Date;
  */
 public class ImageUtils {
 
-    public static File createImageFile() throws IOException {
+    public static File buildImageFilePath(String filename) throws IOException {
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
+        String imageFileName = filename + timeStamp + "_";
         File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
         File image = File.createTempFile(
