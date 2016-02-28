@@ -18,7 +18,7 @@ public class ImageUtils {
     public static File buildImageFilePath(String filename) throws IOException {
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = filename + timeStamp + "_";
+        String imageFileName = filename + "_" + timeStamp + "_";
         File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
         File image = File.createTempFile(

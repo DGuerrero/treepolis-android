@@ -20,6 +20,7 @@ public class CheckinPresenterImpl implements CheckinPresenter {
     private TakeTreePictureinInteractor mInteractor;
     private final IQSharedPrefs mPreferences;
     private int mPhotoButtonId;
+    private String mPictureFullPath;
 
 
     @Inject
@@ -37,10 +38,10 @@ public class CheckinPresenterImpl implements CheckinPresenter {
     @Override
     public void onTakeTreePhotoClick(int viewId) {
         mPhotoButtonId = viewId;
-        String pictureFullPath = mInteractor.buildTreePictureFileFullPath(viewId);
+        mPictureFullPath = mInteractor.buildTreePictureFileFullPath(viewId);
 
-        if(pictureFullPath != null) {
-            mView.takePicture(pictureFullPath);
+        if(mPictureFullPath != null) {
+            mView.takePicture(mPictureFullPath);
         } else {
             mView.displayErrorCapturingImageDialog();
         }
@@ -49,7 +50,7 @@ public class CheckinPresenterImpl implements CheckinPresenter {
 
     @Override
     public void onImageCaptureSuccess() {
-        mView.displayErrorCapturingImageDialog();
+        mView.setTreePictureThumbnail(mPhotoButtonId, mPictureFullPath);
     }
 
     @Override
