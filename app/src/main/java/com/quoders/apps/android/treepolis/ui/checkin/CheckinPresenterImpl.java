@@ -3,9 +3,11 @@ package com.quoders.apps.android.treepolis.ui.checkin;
 import android.app.Application;
 
 import com.quoders.apps.android.treepolis.di.PerActivity;
-import com.quoders.apps.android.treepolis.domain.events.TakeTreePictureMessage;
+import com.quoders.apps.android.treepolis.domain.checkin.TakeTreePictureinInteractor;
+import com.quoders.apps.android.treepolis.domain.checkin.TakeTreePictureinInteractorImpl;
 import com.quoders.apps.android.treepolis.utils.IQSharedPrefs;
-import com.squareup.otto.Subscribe;
+
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -16,8 +18,8 @@ import javax.inject.Inject;
 public class CheckinPresenterImpl implements CheckinPresenter {
 
     private CheckinView mView;
-
     private TakeTreePictureinInteractor mInteractor;
+
     private final IQSharedPrefs mPreferences;
     private int mPhotoButtonId;
     private String mPictureFullPath;
@@ -26,13 +28,22 @@ public class CheckinPresenterImpl implements CheckinPresenter {
     @Inject
     public CheckinPresenterImpl(IQSharedPrefs prefs, Application application) {
         this.mPreferences = prefs;
-        mInteractor = new TakeTreePictureinInteractorImpl(application);
+        mInteractor = new TakeTreePictureinInteractorImpl(application, prefs);
     }
 
 
     @Override
     public void setView(CheckinView view) {
         this.mView = view;
+    }
+
+    @Override
+    public void onViewStarted() {
+        //  We check if there is any tree pending to be upload. If so we load the pictures
+        final Map<Integer, String> photos = mInteractor.getPendingUploadPictures();
+        for (Integer key : photos.keySet()) {
+            mView.setTreePictureThumbnail(key, photos.get(key));
+        }
     }
 
     @Override
@@ -51,19 +62,12 @@ public class CheckinPresenterImpl implements CheckinPresenter {
     @Override
     public void onImageCaptureSuccess() {
         mView.setTreePictureThumbnail(mPhotoButtonId, mPictureFullPath);
+        mInteractor.savePictureTaken(mPhotoButtonId, mPictureFullPath);
     }
 
     @Override
     public void onImageCaptureError() {
         mView.displayErrorCapturingImageDialog();
     }
-
-    @Subscribe
-    public void onTakeTreePictureResult(TakeTreePictureMessage message){
-        if(mView!=null){
-
-        }
-    }
-
 
 }

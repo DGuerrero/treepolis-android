@@ -1,10 +1,6 @@
 <resources>
     <string name="app_name">Treepolis</string>
 
-    <string name="facebook_app_id">796026713818647</string>
-    <string name="parse_app_id">LVENJltnSKPJ9WuFELQcY4DGY0WbGYR2bTsknara</string>
-    <string name="parse_client_key">SCDgdXIkEB6FfxmuU3EuD5HwSJtAqMEmLAhPSZ6S</string>
-
     <string name="action_settings">Settings</string>
     <string name="title_activity_signup">Welcome</string>
 
@@ -30,6 +26,7 @@
     <string name="signup_error_email_taken">The Email address is already taken, please try with a different one.</string>
     <string name="signup_error_email_invalid">The Email address is invalid, please try again.</string>
     <string name="signup_error_username_taken">The user name is already taken, please try again with a different one.</string>
+    <string name="signup_error_unable_to_login">Can not access your account at this moment, please try again later.</string>
     <string name="signup_progress">Creating account...</string>
     <string name="signup_error">Signup Error</string>
     <string name="dialog_button_ok">OK</string>
@@ -56,5 +53,6 @@
     <string name="checkTreePicsTitle">Tap to add pictures of the tree, leaf and fruit</string>
     <string name="dialog_title_error">Error</string>
     <string name="dialog_message_error_taking_picture">Error taking the picture.</string>
+    <string name="firebase_treepolis_url">https://treepolis.firebaseio.com</string>
 
 </resources>

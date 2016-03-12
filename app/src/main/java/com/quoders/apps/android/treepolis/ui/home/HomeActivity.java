@@ -1,15 +1,11 @@
 package com.quoders.apps.android.treepolis.ui.home;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -19,9 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.firebase.client.Firebase;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.parse.ParseUser;
 import com.quoders.apps.android.treepolis.R;
+import com.quoders.apps.android.treepolis.helpers.PermissionsHelper;
+import com.quoders.apps.android.treepolis.model.TreepolisConsts;
 import com.quoders.apps.android.treepolis.ui.HomeMapFragment;
 import com.quoders.apps.android.treepolis.ui.maps.GoogleMapsMng;
 import com.quoders.apps.android.treepolis.ui.maps.LocationMng;
@@ -34,11 +32,6 @@ import butterknife.OnClick;
 public class HomeActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks,
                     HomeMapFragment.OnFragmentInteractionListener {
 
-    private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 0x000001;
-
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
     private DrawerLayout mDrawerLayout;
     private View content;
 
@@ -50,6 +43,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
     private LocationMng mLocationMng;
 
     private HomePresenter mPresenter;
+
 
     @OnClick(R.id.fabCheckin)
     public void checkTreeButtonClick(View view) {
@@ -72,12 +66,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
         setupDrawerLayout();
 
         initToolbar();
-
-        setUserData();
-
-        setMapFragment();
-
-        setLocationManager();
+        initUserData();
+        initMapFragment();
+        initLocationManager();
     }
 
     @Override
@@ -85,21 +76,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
         super.onStart();
 
         if(mLocationMng != null) {
-
-            if(doWeHaveLocationPermission()) {
+            if(PermissionsHelper.doWeHaveLocationPermission(this)) {
                 mLocationMng.startLocationService();
             } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+                PermissionsHelper.requestLocationPermission(this);
             }
         }
     }
 
-    private boolean doWeHaveLocationPermission() {
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED;
-    }
+
 
     @Override
     protected void onStop() {
@@ -110,12 +95,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
         }
     }
 
-    private void setLocationManager() {
+    private void initLocationManager() {
         mLocationMng = new LocationMng(this, true, mMapMng);
     }
 
 
-    private void setMapFragment() {
+    private void initMapFragment() {
 
         mMapMng = new GoogleMapsMng();
 
@@ -124,14 +109,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
         mapFragment.getMapAsync(mMapMng);
     }
 
-    private void setUserData() {
+    private void initUserData() {
 
-        ParseUser currentUser = ParseUser.getCurrentUser();
+        //AuthData authData = ref.getAuth();
+        //  TODO
 
-        if(currentUser != null) {
+        //if(currentUser != null) {
             //((TextView)findViewById(R.id.textViewDrawerHeaderEmail)).setText(currentUser.getEmail());
             //((TextView)findViewById(R.id.textViewDrawerHeaderUsername)).setText(currentUser.getUsername());
-        }
+        //}
     }
 
 
@@ -196,8 +182,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
     }
 
     private void performUserLogout() {
-
-        ParseUser.logOut();
+        Firebase ref = new Firebase(TreepolisConsts.FIREBASE_TREEPOLIS_URL);
+        ref.unauth();
         startActivity(new Intent(this, WelcomeActivity.class));
         finish();
     }
@@ -254,14 +240,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    mLocationMng.startLocationService();
-                } else {
-                    mLocationMng.stopLocationService();
-                }
-                break;
+        if(PermissionsHelper.hasLocationPermissionBeenGranted(requestCode, permissions, grantResults)) {
+            mLocationMng.startLocationService();
+        } else {
+            mLocationMng.stopLocationService();
         }
     }
 }

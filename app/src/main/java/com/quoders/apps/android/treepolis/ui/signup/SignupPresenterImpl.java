@@ -3,9 +3,8 @@ package com.quoders.apps.android.treepolis.ui.signup;
 import android.content.Context;
 import android.content.Intent;
 
-import com.parse.ParseException;
+import com.firebase.client.FirebaseError;
 import com.quoders.apps.android.treepolis.R;
-import com.quoders.apps.android.treepolis.model.TreepolisConsts;
 import com.quoders.apps.android.treepolis.ui.home.HomeActivity;
 
 /**
@@ -13,6 +12,7 @@ import com.quoders.apps.android.treepolis.ui.home.HomeActivity;
  */
 public class SignupPresenterImpl implements SignupPresenter, SignupInteractorImpl.SignupListener {
 
+    public static final String REGEX_EMAIL = "[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\\.[a-zA-Z]{2,4}";
 
     private SignupView          mView;
     private SignupInteractor    mInteractor;
@@ -40,7 +40,7 @@ public class SignupPresenterImpl implements SignupPresenter, SignupInteractorImp
         boolean result = true;
 
         //  Check valid email
-        if(!mView.getFieldEmail().matches(TreepolisConsts.REGEX_EMAIL)) {
+        if(!mView.getFieldEmail().matches(REGEX_EMAIL)) {
             mView.setFieldEmailError(R.string.field_error_email_invalid);
             result = false;
         }
@@ -83,19 +83,25 @@ public class SignupPresenterImpl implements SignupPresenter, SignupInteractorImp
         mView.showAlertDialog(mContext.getString(R.string.signup_error), getSignUpErrorMessage(errorMessage));
     }
 
+    @Override
+    public void onLoginErrorAfterSignup() {
+        mView.stopProgressDialog();
+        mView.showAlertDialog(mContext.getString(R.string.signup_error), mContext.getString(R.string.signup_error_unable_to_login));
+    }
+
 
     private String getSignUpErrorMessage(int code) {
 
         String errorMessage = mContext.getString(R.string.signup_error_unknown);
 
         switch (code) {
-            case ParseException.EMAIL_TAKEN:
+            case FirebaseError.EMAIL_TAKEN:
                 errorMessage = mContext.getString(R.string.signup_error_email_taken);
                 break;
-            case ParseException.INVALID_EMAIL_ADDRESS:
+            case FirebaseError.INVALID_EMAIL:
                 errorMessage = mContext.getString(R.string.signup_error_email_invalid);
                 break;
-            case ParseException.USERNAME_TAKEN:
+            case FirebaseError.UNAVAILABLE:
                 errorMessage = mContext.getString(R.string.signup_error_username_taken);
                 break;
         }

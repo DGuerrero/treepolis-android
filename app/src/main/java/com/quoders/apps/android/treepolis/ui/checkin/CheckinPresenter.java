@@ -7,6 +7,8 @@ public interface CheckinPresenter  {
 
     void setView(CheckinView view);
 
+    void onViewStarted();
+
     void onTakeTreePhotoClick(int viewId);
 
     void onImageCaptureSuccess();

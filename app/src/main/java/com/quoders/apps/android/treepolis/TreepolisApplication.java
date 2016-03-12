@@ -3,8 +3,7 @@ package com.quoders.apps.android.treepolis;
 import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
-import com.parse.Parse;
-import com.parse.ParseFacebookUtils;
+import com.firebase.client.Firebase;
 import com.quoders.apps.android.treepolis.di.AppModule;
 import com.quoders.apps.android.treepolis.di.CheckinComponent;
 import com.quoders.apps.android.treepolis.di.CheckinModule;
@@ -45,11 +44,7 @@ public class TreepolisApplication extends Application {
 
         Fabric.with(this, new Crashlytics());
 
-        //  Initialize Parse
-        Parse.initialize(this, getString(R.string.parse_app_id), getString(R.string.parse_client_key));
-
-        // Initialize Facebook
-        ParseFacebookUtils.initialize(getApplicationContext());
+        Firebase.setAndroidContext(this);
     }
 
     public NetComponent getNetComponent() {

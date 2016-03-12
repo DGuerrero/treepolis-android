@@ -1,18 +1,17 @@
-package com.quoders.apps.android.treepolis.ui.checkin;
+package com.quoders.apps.android.treepolis.domain.checkin;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 
 import com.quoders.apps.android.treepolis.R;
-import com.quoders.apps.android.treepolis.domain.eventbus.BusProvider;
-import com.quoders.apps.android.treepolis.domain.events.TakeTreePictureMessage;
 import com.quoders.apps.android.treepolis.model.ImageUtils;
 import com.quoders.apps.android.treepolis.model.checkin.CheckinConsts;
+import com.quoders.apps.android.treepolis.utils.IQSharedPrefs;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -20,32 +19,14 @@ import java.io.IOException;
  */
 public class TakeTreePictureinInteractorImpl implements TakeTreePictureinInteractor {
 
-    private Context mContext;
+    private final Context mContext;
+    private final IQSharedPrefs mSharedPrefs;
 
-    public TakeTreePictureinInteractorImpl(Context context) {
+    public TakeTreePictureinInteractorImpl(@NonNull Context context, @NonNull IQSharedPrefs sharedPrefs) {
         this.mContext = context;
+        this.mSharedPrefs = sharedPrefs;
     }
 
-    @Override
-    public void takeTreePicture(String fileName) {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        if (takePictureIntent.resolveActivity(mContext.getPackageManager()) != null) {
-            File photoFile = null;
-            try {
-                photoFile = ImageUtils.buildImageFilePath(fileName);
-            } catch (IOException ex) {
-                 BusProvider.getInstance().post(new TakeTreePictureMessage(TakeTreePictureMessage.ERROR_SAVING_PICTURE));
-                return;
-            }
-
-            if (photoFile != null) {
-                //mImagePath = photoFile.getPath();
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                //startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            }
-        }
-    }
 
     @Override
     public String buildTreePictureFileFullPath(int viewId) {
@@ -67,6 +48,34 @@ public class TakeTreePictureinInteractorImpl implements TakeTreePictureinInterac
         return imagePath;
     }
 
+    @Override
+    public void savePictureTaken(int viewId, String path) {
+        mSharedPrefs.setString(String.valueOf(viewId), path);
+    }
+
+    @Override
+    public Map<Integer, String> getPendingUploadPictures() {
+
+        Map<Integer, String> pendingPhotos = new HashMap<>(3);
+
+        String fruitPic = mSharedPrefs.getString(mapPictureNameFromId(R.id.circleButtonFruitPhoto));
+        if(fruitPic != null && !fruitPic.isEmpty()) {
+            pendingPhotos.put(R.id.circleButtonFruitPhoto, fruitPic);
+        }
+
+        String treePic = mSharedPrefs.getString(mapPictureNameFromId(R.id.circleButtonTreePhoto));
+        if(treePic != null && !treePic.isEmpty()) {
+            pendingPhotos.put(R.id.circleButtonTreePhoto, treePic);
+        }
+
+        String leafPic = mSharedPrefs.getString(mapPictureNameFromId(R.id.circleButtonLeafPhoto));
+        if(leafPic != null && !leafPic.isEmpty()) {
+            pendingPhotos.put(R.id.circleButtonLeafPhoto, leafPic);
+        }
+
+        return pendingPhotos;
+    }
+
     private String mapPictureNameFromId(int viewId) {
         switch (viewId) {
             case R.id.circleButtonTreePhoto:
@@ -78,4 +87,6 @@ public class TakeTreePictureinInteractorImpl implements TakeTreePictureinInterac
         }
         return CheckinConsts.CHEKIN_UNKNOWN_PICTURE_FILE_NAME;
     }
+
+
 }

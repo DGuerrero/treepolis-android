@@ -8,10 +8,14 @@ import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.maps.SupportMapFragment;
 import com.quoders.apps.android.treepolis.BaseActivity;
 import com.quoders.apps.android.treepolis.R;
 import com.quoders.apps.android.treepolis.TreepolisApplication;
+import com.quoders.apps.android.treepolis.helpers.PermissionsHelper;
 import com.quoders.apps.android.treepolis.model.ImageUtils;
+import com.quoders.apps.android.treepolis.ui.maps.GoogleMapsMng;
+import com.quoders.apps.android.treepolis.ui.maps.LocationMng;
 import com.quoders.apps.android.treepolis.ui.widgets.CircleButton;
 
 import java.io.File;
@@ -25,15 +29,15 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
 
     private static final int REQUEST_IMAGE_CAPTURE = 0x0001;
 
-    @Bind(R.id.circleButtonTreePhoto)
-    CircleButton mCircleButtonTree;
-    @Bind(R.id.circleButtonLeafPhoto)
-    CircleButton mCircleButtonLeaf;
-    @Bind(R.id.circleButtonFruitPhoto)
-    CircleButton mCircleButtonFruit;
+    @Bind(R.id.circleButtonTreePhoto) CircleButton mCircleButtonTree;
+    @Bind(R.id.circleButtonLeafPhoto) CircleButton mCircleButtonLeaf;
+    @Bind(R.id.circleButtonFruitPhoto) CircleButton mCircleButtonFruit;
 
     @Inject
     CheckinPresenter mPresenter;
+
+    private GoogleMapsMng mMapMng;
+    private LocationMng mLocationMng;
 
 
     @Override
@@ -42,12 +46,13 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
         setContentView(R.layout.activity_checkin_tree);
         ButterKnife.bind(this);
         initToolbar();
-
         ((TreepolisApplication) getApplication()).getCheckinComponent().inject(this);
 
         mPresenter.setView(this);
 
         initTakePhotoButtons();
+        initMapFragment();
+        initLocationManager();
     }
 
     @Override
@@ -56,6 +61,20 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
             mPresenter.onImageCaptureSuccess();
         } else {
             mPresenter.onImageCaptureError();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mPresenter.onViewStarted();
+
+        if(mLocationMng != null) {
+            if(PermissionsHelper.doWeHaveLocationPermission(this)) {
+                mLocationMng.startLocationService();
+            } else {
+                PermissionsHelper.requestLocationPermission(this);
+            }
         }
     }
 
@@ -71,6 +90,18 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
         mCircleButtonFruit.setButtonImage(R.drawable.ic_fruit);
     }
 
+    private void initMapFragment() {
+        mMapMng = new GoogleMapsMng();
+
+        // Obtain the MapFragment and set the async listener to be notified when the map is ready.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(mMapMng);
+    }
+
+    private void initLocationManager() {
+        mLocationMng = new LocationMng(this, true, mMapMng);
+    }
+
     public void onTakePhotoClick(View view) {
         mPresenter.onTakeTreePhotoClick(view.getId());
     }
@@ -83,7 +114,6 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
 
     @Override
     public void takePicture(String filePath) {
-
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {

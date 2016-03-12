@@ -5,5 +5,5 @@ package com.quoders.apps.android.treepolis.model;
  */
 public class TreepolisConsts {
 
-    public static final String REGEX_EMAIL = "[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\\.[a-zA-Z]{2,4}";
+    public static final String FIREBASE_TREEPOLIS_URL = "https://treepolis.firebaseio.com";
 }

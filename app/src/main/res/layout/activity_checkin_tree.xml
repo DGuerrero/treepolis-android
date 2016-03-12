@@ -22,6 +22,7 @@
         android:layout_below="@+id/toolbar"/>
 
     <LinearLayout
+        android:id="@+id/linearLayoutPhotoButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -67,6 +68,15 @@
 
     </LinearLayout>
 
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearLayoutPhotoButtons"
+        android:layout_above="@+id/buttonSubmitTree"
+        android:layout_margin="16dp"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        tools:layout="@layout/fragment_map"/>
 
     <Button
         android:id="@+id/buttonSubmitTree"

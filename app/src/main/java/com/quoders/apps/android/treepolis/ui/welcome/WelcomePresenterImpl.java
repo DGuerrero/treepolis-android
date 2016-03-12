@@ -2,7 +2,7 @@ package com.quoders.apps.android.treepolis.ui.welcome;
 
 import android.app.Activity;
 
-import com.parse.ParseException;
+import com.firebase.client.FirebaseError;
 import com.quoders.apps.android.treepolis.ui.signup.SignupActivity;
 
 /**
@@ -50,7 +50,7 @@ public class WelcomePresenterImpl implements WelcomePresenter, WelcomeInteractor
     }
 
     @Override
-    public void onLoginError(ParseException exception) {
+    public void onLoginError(FirebaseError firebaseError) {
         mView.stopProgressDialog();
         mView.showLoginErrorAlertDialog();
     }
