@@ -192,6 +192,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
     @Override
     public void onNavigationDrawerItemSelected(int position) {
 
+        //  Testing git
         // update the main content by replacing fragments
         /*
         FragmentManager fragmentManager = getSupportFragmentManager();
