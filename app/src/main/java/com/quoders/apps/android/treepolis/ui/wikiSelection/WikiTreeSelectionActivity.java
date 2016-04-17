@@ -1,5 +1,6 @@
 package com.quoders.apps.android.treepolis.ui.wikiSelection;
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -89,7 +90,12 @@ public class WikiTreeSelectionActivity extends BaseActivity implements WikiTreeS
     public void showErrorAccessingWikiTress() {
         mDialog.showDialogNeutral(R.string.dialog_title_error,
                 R.string.wikitrees_info_loading_error,
-                R.string.dialog_button_ok, null);
+                R.string.dialog_button_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
     }
 
     @Override

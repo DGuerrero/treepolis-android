@@ -6,6 +6,8 @@ import com.quoders.apps.android.treepolis.model.checkin.WikiTreeLink;
 import java.util.List;
 
 import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 public class WikiTreeSelectionPresenterImpl implements WikiTreeSelectionPresenter {
@@ -31,7 +33,9 @@ public class WikiTreeSelectionPresenterImpl implements WikiTreeSelectionPresente
 
     private void getWikiTreeLinks() {
 
-        mSubscriptions.add(mInteractor.loadWikiTreeLinks().subscribe(new Observer<List<WikiTreeLink>>() {
+        mSubscriptions.add(mInteractor.loadWikiTreeLinks()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<WikiTreeLink>>() {
             @Override
             public void onCompleted() {
             }
