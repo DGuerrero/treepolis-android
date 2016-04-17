@@ -1,7 +1,10 @@
 package com.quoders.apps.android.treepolis.ui.checkin;
 
+import android.app.Activity;
 import android.app.Application;
+import android.content.Intent;
 
+import com.quoders.apps.android.treepolis.BaseView;
 import com.quoders.apps.android.treepolis.di.PerActivity;
 import com.quoders.apps.android.treepolis.domain.checkin.TakeTreePictureinInteractor;
 import com.quoders.apps.android.treepolis.domain.checkin.TakeTreePictureinInteractorImpl;
@@ -31,15 +34,13 @@ public class CheckinPresenterImpl implements CheckinPresenter {
         mInteractor = new TakeTreePictureinInteractorImpl(application, prefs);
     }
 
-
     @Override
-    public void setView(CheckinView view) {
-        this.mView = view;
+    public void onViewAttached(BaseView view) {
+        this.mView = (CheckinView)view;
+        this.initView();
     }
 
-    @Override
-    public void onViewStarted() {
-        //  We check if there is any tree pending to be upload. If so we load the pictures
+    private void initView() {
         final Map<Integer, String> photos = mInteractor.getPendingUploadPictures();
         for (Integer key : photos.keySet()) {
             mView.setTreePictureThumbnail(key, photos.get(key));
@@ -47,9 +48,22 @@ public class CheckinPresenterImpl implements CheckinPresenter {
     }
 
     @Override
+    public void onViewDetached() {
+    }
+
+    @Override
     public void onTakeTreePhotoClick(int viewId) {
         mPhotoButtonId = viewId;
-        mPictureFullPath = mInteractor.buildTreePictureFileFullPath(viewId);
+
+        if(mView.doWeHaveWriteStoragePermission()) {
+            this.takeTreePicture();
+        } else {
+            mView.requestWriteStoragePermission();
+        }
+    }
+
+    private void takeTreePicture() {
+        mPictureFullPath = mInteractor.buildTreePictureFileFullPath(mPhotoButtonId);
 
         if(mPictureFullPath != null) {
             mView.takePicture(mPictureFullPath);
@@ -57,7 +71,6 @@ public class CheckinPresenterImpl implements CheckinPresenter {
             mView.displayErrorCapturingImageDialog();
         }
     }
-
 
     @Override
     public void onImageCaptureSuccess() {
@@ -70,4 +83,39 @@ public class CheckinPresenterImpl implements CheckinPresenter {
         mView.displayErrorCapturingImageDialog();
     }
 
+    @Override
+    public void onNotKnownTreeClicked() {
+        mView.clearTreeInfoView();
+    }
+
+    @Override
+    public void onKnownTreeClicked() {
+        mView.navigateToWikipediaTreeInfoSelector();
+    }
+
+    @Override
+    public void onRequestPermissionsWriteStorageGranted() {
+        this.takeTreePicture();
+    }
+
+    @Override
+    public void onRequestPermissionsWriteStorageDenied() {
+        mView.displayErrorCapturingImageDialog();
+    }
+
+    @Override
+    public void processImageCaptureResult(int resultCode) {
+        if (resultCode == Activity.RESULT_OK) {
+            onImageCaptureSuccess();
+        } else {
+            onImageCaptureError();
+        }
+    }
+
+    @Override
+    public void processWikiTreeSelection(int resultCode, Intent data) {
+        if(resultCode == Activity.RESULT_OK) {
+        } else {
+        }
+    }
 }

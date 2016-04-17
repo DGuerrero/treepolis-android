@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:weightSum="1"
     android:orientation="vertical"
-    tools:context="com.quoders.apps.android.treepolis.ui.HomeMapFragment">
+    tools:context=".ui.home.HomeMapFragment">
 
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"

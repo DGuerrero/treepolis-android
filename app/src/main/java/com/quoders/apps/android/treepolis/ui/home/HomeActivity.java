@@ -20,7 +20,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.quoders.apps.android.treepolis.R;
 import com.quoders.apps.android.treepolis.helpers.PermissionsHelper;
 import com.quoders.apps.android.treepolis.model.TreepolisConsts;
-import com.quoders.apps.android.treepolis.ui.HomeMapFragment;
 import com.quoders.apps.android.treepolis.ui.maps.GoogleMapsMng;
 import com.quoders.apps.android.treepolis.ui.maps.LocationMng;
 import com.quoders.apps.android.treepolis.ui.welcome.WelcomeActivity;
@@ -83,7 +82,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
             }
         }
     }
-
 
 
     @Override
@@ -241,7 +239,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationDrawerF
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        if(PermissionsHelper.hasLocationPermissionBeenGranted(requestCode, permissions, grantResults)) {
+        if(PermissionsHelper.hasLocationPermissionBeenGranted(requestCode, grantResults)) {
             mLocationMng.startLocationService();
         } else {
             mLocationMng.stopLocationService();

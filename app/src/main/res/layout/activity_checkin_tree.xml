@@ -7,85 +7,199 @@
 
     <include layout="@layout/toolbar"/>
 
-    <TextView
-        android:id="@+id/textViewTreePicsTitle"
-        android:text="@string/checkTreePicsTitle"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:gravity="center"
-        android:textSize="@dimen/text_standard_subtitle"
-        android:textColor="@color/primary_dark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/toolbar"/>
-
-    <LinearLayout
-        android:id="@+id/linearLayoutPhotoButtons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/textViewTreePicsTitle">
-
-        <com.quoders.apps.android.treepolis.ui.widgets.CircleButton
-            android:id="@+id/circleButtonTreePhoto"
-            android:onClick="onTakePhotoClick"
-            android:clickable="true"
-            android:layout_margin="10dp"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:drawableTop="@drawable/ic_tree"
-            android:drawablePadding="10dp"
-            android:background="@drawable/green_circle_background"
-             />
-
-        <com.quoders.apps.android.treepolis.ui.widgets.CircleButton
-            android:id="@+id/circleButtonLeafPhoto"
-            android:onClick="onTakePhotoClick"
-            android:clickable="true"
-            android:layout_margin="10dp"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:drawableTop="@drawable/ic_leaf"
-            android:drawablePadding="10dp"
-            android:background="@drawable/green_circle_background"
-            />
-
-        <com.quoders.apps.android.treepolis.ui.widgets.CircleButton
-            android:id="@+id/circleButtonFruitPhoto"
-            android:onClick="onTakePhotoClick"
-            android:clickable="true"
-            android:layout_margin="10dp"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:drawableTop="@drawable/ic_fruit"
-            android:drawablePadding="10dp"
-            android:background="@drawable/green_circle_background"
-            />
-
-    </LinearLayout>
-
-    <fragment
-        android:id="@+id/map"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/linearLayoutPhotoButtons"
-        android:layout_above="@+id/buttonSubmitTree"
-        android:layout_margin="16dp"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        tools:layout="@layout/fragment_map"/>
+        android:layout_below="@+id/toolbar">
 
-    <Button
-        android:id="@+id/buttonSubmitTree"
-        android:layout_width="@dimen/button_standard_width"
-        android:layout_height="@dimen/button_standard_height"
-        style="@style/Treepolis.Button"
-        android:text="@string/submit_tree"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
+            <TextView
+                android:id="@+id/textViewTreePicsTitle"
+                android:text="@string/checkTreePicsTitle"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:textSize="@dimen/text_standard_subtitle"
+                android:textColor="@color/primary_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <!-- Take tree pictures buttons -->
+            <LinearLayout
+                android:id="@+id/linearLayoutPhotoButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+                <com.quoders.apps.android.treepolis.ui.widgets.CircleButton
+                    android:id="@+id/circleButtonTreePhoto"
+                    android:onClick="onTakePhotoClick"
+                    android:clickable="true"
+                    android:layout_margin="10dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:drawableTop="@drawable/ic_tree"
+                    android:drawablePadding="10dp"
+                    android:background="@drawable/green_circle_background"
+                     />
+                <com.quoders.apps.android.treepolis.ui.widgets.CircleButton
+                    android:id="@+id/circleButtonLeafPhoto"
+                    android:onClick="onTakePhotoClick"
+                    android:clickable="true"
+                    android:layout_margin="10dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:drawableTop="@drawable/ic_leaf"
+                    android:drawablePadding="10dp"
+                    android:background="@drawable/green_circle_background"
+                    />
+                <com.quoders.apps.android.treepolis.ui.widgets.CircleButton
+                    android:id="@+id/circleButtonFruitPhoto"
+                    android:onClick="onTakePhotoClick"
+                    android:clickable="true"
+                    android:layout_margin="10dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:drawableTop="@drawable/ic_fruit"
+                    android:drawablePadding="10dp"
+                    android:background="@drawable/green_circle_background"
+                    />
+            </LinearLayout>
+
+            <!-- Separator 1 -->
+            <FrameLayout
+                android:background="@color/light_grey_separator"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:layout_height="1dp"/>
+
+            <!-- Tree information -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewTreeInfoTitle"
+                    android:text="@string/checkTreeInfoTitle"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/text_standard_subtitle"
+                    android:textColor="@color/primary_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/textViewTreeName"
+                    android:text="@string/checkin_tree_name"
+                    android:textSize="@dimen/text_standard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp"/>
+                <TextView
+                    android:id="@+id/textViewTreeDescription"
+                    android:text="@string/checkin_tree_description"
+                    android:textSize="@dimen/text_standard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="3"
+                    android:maxLines="3"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp"/>
+
+                <RadioGroup
+                    android:orientation="horizontal"
+                    android:weightSum="1"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/radioButtonUnknowTree"
+                        android:text="@string/not_known_tree"
+                        android:textColor="@color/primary_dark"
+                        android:checked="true"
+                        android:ellipsize="end"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_gravity="center"
+                        android:layout_weight=".5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:onClick="onChekinUnknownTreeClick"/>
+                    <RadioButton
+                        android:id="@+id/radioButtonKnownTree"
+                        android:text="@string/known_tree"
+                        android:textColor="@color/primary_dark"
+                        android:checked="false"
+                        android:ellipsize="end"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_gravity="center"
+                        android:layout_weight=".5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:onClick="onChekinKnownTreeClick"/>
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <!-- Separator 2 -->
+            <FrameLayout
+                android:background="@color/light_grey_separator"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:layout_height="1dp"/>
+
+            <!-- Map -->
+            <TextView
+                android:id="@+id/textViewMapTitle"
+                android:text="@string/checkTreeMapTitle"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="@dimen/text_standard_subtitle"
+                android:textColor="@color/primary_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <fragment
+                android:id="@+id/map"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                tools:layout="@layout/fragment_map"/>
+
+            <!-- Separator 3 -->
+            <FrameLayout
+                android:background="@color/light_grey_separator"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:layout_height="1dp"/>
+
+            <Button
+                android:id="@+id/buttonSubmitTree"
+                android:layout_width="@dimen/button_standard_width"
+                android:layout_height="@dimen/button_standard_height"
+                style="@style/Treepolis.Button"
+                android:text="@string/submit_tree"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

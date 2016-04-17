@@ -1,4 +1,4 @@
-package com.quoders.apps.android.treepolis.ui;
+package com.quoders.apps.android.treepolis.ui.home;
 
 import android.app.Activity;
 import android.location.Location;

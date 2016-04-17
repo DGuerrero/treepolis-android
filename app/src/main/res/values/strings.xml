@@ -31,7 +31,6 @@
     <string name="signup_error">Signup Error</string>
     <string name="dialog_button_ok">OK</string>
 
-
     <!-- Home -->
     <string name="title_activity_home">Treepolis</string>
     <string name="title_section1">Section 1</string>
@@ -43,7 +42,6 @@
     <string name="unknown_error">Unknown error. Please try again later.</string>
     <string name="login_error_user_not_found">Please check user name and password and try again.</string>
     <string name="drawer_menu_option_logout">Logout</string>
-
     <string name="button_checkin_tree">Check Tree</string>
     <string name="home_no_trees_around">No trees found around you. Be the first in check a new tree here!</string>
 
@@ -53,6 +51,18 @@
     <string name="checkTreePicsTitle">Tap to add pictures of the tree, leaf and fruit</string>
     <string name="dialog_title_error">Error</string>
     <string name="dialog_message_error_taking_picture">Error taking the picture.</string>
+    <string name="checkin_tree_name">Name:</string>
+    <string name="checkin_tree_description">Description:</string>
+    <string name="not_known_tree">I don\'t know this tree</string>
+    <string name="known_tree">Let me identify this tree</string>
+    <string name="checkTreeInfoTitle">Add tree information if you know it</string>
+    <string name="checkTreeMapTitle">Be sure you are close the tree and location accuracy is highest possible</string>
+    <string name="wiki_select_tree">Select this tree</string>
+
+    <!-- Backend -->
     <string name="firebase_treepolis_url">https://treepolis.firebaseio.com</string>
+
+    <string name="wiki_trees_list_url">https://en.m.wikipedia.org/wiki/List_of_trees_and_shrubs_by_taxonomic_family</string>
+    <string name="wiki_trees_json">wikitrees.json</string>
 
 </resources>

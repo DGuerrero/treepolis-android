@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.SupportMapFragment;
 import com.quoders.apps.android.treepolis.BaseActivity;
@@ -17,6 +18,7 @@ import com.quoders.apps.android.treepolis.model.ImageUtils;
 import com.quoders.apps.android.treepolis.ui.maps.GoogleMapsMng;
 import com.quoders.apps.android.treepolis.ui.maps.LocationMng;
 import com.quoders.apps.android.treepolis.ui.widgets.CircleButton;
+import com.quoders.apps.android.treepolis.ui.wikiSelection.WikiTreeSelectionActivity;
 
 import java.io.File;
 
@@ -28,10 +30,13 @@ import butterknife.ButterKnife;
 public class CheckinActivity extends BaseActivity implements CheckinView {
 
     private static final int REQUEST_IMAGE_CAPTURE = 0x0001;
+    private static final int REQUEST_CODE_WIKIPEDIA_TREE_SELECTION = 0x9001;
 
     @Bind(R.id.circleButtonTreePhoto) CircleButton mCircleButtonTree;
     @Bind(R.id.circleButtonLeafPhoto) CircleButton mCircleButtonLeaf;
     @Bind(R.id.circleButtonFruitPhoto) CircleButton mCircleButtonFruit;
+    @Bind(R.id.textViewTreeName) TextView mTvTreeName;
+    @Bind(R.id.textViewTreeDescription) TextView mTvTreeDescription;
 
     @Inject
     CheckinPresenter mPresenter;
@@ -48,29 +53,28 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
         initToolbar();
         ((TreepolisApplication) getApplication()).getCheckinComponent().inject(this);
 
-        mPresenter.setView(this);
-
         initTakePhotoButtons();
         initMapFragment();
         initLocationManager();
+
+        mPresenter.onViewAttached(this);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            mPresenter.onImageCaptureSuccess();
-        } else {
-            mPresenter.onImageCaptureError();
+        if (requestCode == REQUEST_IMAGE_CAPTURE) {
+            mPresenter.processImageCaptureResult(resultCode);
+        } else if(requestCode == REQUEST_CODE_WIKIPEDIA_TREE_SELECTION) {
+            mPresenter.processWikiTreeSelection(resultCode, data);
         }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        mPresenter.onViewStarted();
 
-        if(mLocationMng != null) {
-            if(PermissionsHelper.doWeHaveLocationPermission(this)) {
+        if (mLocationMng != null) {
+            if (PermissionsHelper.doWeHaveLocationPermission(this)) {
                 mLocationMng.startLocationService();
             } else {
                 PermissionsHelper.requestLocationPermission(this);
@@ -103,7 +107,9 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
     }
 
     public void onTakePhotoClick(View view) {
-        mPresenter.onTakeTreePhotoClick(view.getId());
+        if (PermissionsHelper.doWeHaveLocationPermission(this)) {
+            mPresenter.onTakeTreePhotoClick(view.getId());
+        }
     }
 
     @Override
@@ -135,6 +141,28 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
     }
 
     @Override
+    public void clearTreeInfoView() {
+        mTvTreeName.setText(R.string.checkin_tree_name);
+        mTvTreeDescription.setText(R.string.checkin_tree_description);
+    }
+
+    @Override
+    public void navigateToWikipediaTreeInfoSelector() {
+        startActivityForResult(new Intent(this, WikiTreeSelectionActivity.class),
+                REQUEST_CODE_WIKIPEDIA_TREE_SELECTION);
+    }
+
+    @Override
+    public boolean doWeHaveWriteStoragePermission() {
+        return PermissionsHelper.doWeHaveWriteExternalStoragePermission(this);
+    }
+
+    @Override
+    public void requestWriteStoragePermission() {
+        PermissionsHelper.requestWriteExternalStoragePermission(this);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -144,5 +172,22 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
 
         return super.onOptionsItemSelected(item);
     }
-}
 
+    public void onChekinKnownTreeClick(View view) {
+        mPresenter.onKnownTreeClicked();
+    }
+
+    public void onChekinUnknownTreeClick(View view) {
+        mPresenter.onNotKnownTreeClicked();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+
+        if (PermissionsHelper.hasWriteExternalStoragePermissionBeenGranted(requestCode, grantResults)) {
+            mPresenter.onRequestPermissionsWriteStorageGranted();
+        } else {
+            mPresenter.onRequestPermissionsWriteStorageDenied();
+        }
+    }
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.quoders.apps.android.treepolis.ui.wikiSelection.WikiTreeSelectionActivity">
+
+    <include layout="@layout/toolbar"/>
+
+    <WebView
+        android:id="@+id/webViewWikiSelection"
+        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/buttonWikiInfoSelect"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/buttonWikiInfoSelect"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_standard_height"
+        style="@style/Treepolis.Button"
+        android:text="@string/wiki_select_tree"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"/>
+
+</RelativeLayout>

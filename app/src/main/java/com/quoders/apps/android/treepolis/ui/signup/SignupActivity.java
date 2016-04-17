@@ -2,12 +2,10 @@ package com.quoders.apps.android.treepolis.ui.signup;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
+import com.quoders.apps.android.treepolis.BaseActivity;
 import com.quoders.apps.android.treepolis.R;
 import com.quoders.apps.android.treepolis.ui.dialogs.QAlertDialog;
 import com.quoders.apps.android.treepolis.ui.dialogs.QProgressDialog;
@@ -16,10 +14,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SignupActivity extends AppCompatActivity implements SignupView {
+public class SignupActivity extends BaseActivity implements SignupView {
 
     public static final int REQUEST_ID_SIGNUP = 0x0001;
-
 
     @Bind(R.id.editTextCreateUserName)    EditText mEtCreateUserName;
     @Bind(R.id.editTextCreateEmail)       EditText mEtCreateEmail;
@@ -32,7 +29,6 @@ public class SignupActivity extends AppCompatActivity implements SignupView {
         mPresenter.onCreateAccountClick();
     }
 
-    ActionBar mActionBar;
     SignupPresenter mPresenter;
     QProgressDialog mProgressDialog;
     QAlertDialog mAlertDialog;
@@ -44,17 +40,12 @@ public class SignupActivity extends AppCompatActivity implements SignupView {
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
 
+        initToolbar();
         mPresenter = new SignupPresenterImpl(this);
         mProgressDialog = new QProgressDialog(this);
         mAlertDialog = new QAlertDialog(this);
     }
 
-
-    private void initToolbar() {
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        mActionBar = getSupportActionBar();
-    }
 
     @Override
     protected void onStop() {
