@@ -39,10 +39,7 @@ public class WikiTreeSelectionActivity extends BaseActivity implements WikiTreeS
     }
 
     private void loadTreesLinks() {
-        String wikiTrees = FileUtils.readJsonFile(this, getString(R.string.wiki_trees_json));
-        if(wikiTrees != null) {
 
-        }
     }
 
     private void initWebview() {
@@ -60,4 +57,5 @@ public class WikiTreeSelectionActivity extends BaseActivity implements WikiTreeS
         mWebViewWiki.setWebViewClient(webViewClient);
         mWebViewWiki.loadUrl(getString(R.string.wiki_trees_list_url));
     }
+
 }
