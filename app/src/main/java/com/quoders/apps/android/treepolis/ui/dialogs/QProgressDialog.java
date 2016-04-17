@@ -15,7 +15,13 @@ public class QProgressDialog {
         mContext = context;
     }
 
+    public void show(int message, boolean cancelable) {
+        show(mContext.getString(message), cancelable);
+    }
+
     public void show(String title, String message, boolean cancelable) {
+
+        stop();
 
         if(mDialog == null) {
             mDialog = new ProgressDialog(mContext);
@@ -27,6 +33,8 @@ public class QProgressDialog {
     }
 
     public void show(String message, boolean cancelable) {
+
+        stop();
 
         if(mDialog == null) {
             mDialog = new ProgressDialog(mContext);

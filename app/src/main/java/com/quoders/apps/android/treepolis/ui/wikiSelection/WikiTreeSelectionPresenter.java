@@ -4,4 +4,5 @@ import com.quoders.apps.android.treepolis.BasePresenter;
 
 public interface WikiTreeSelectionPresenter extends BasePresenter {
 
+    void onTreeInfoSelected(String url);
 }

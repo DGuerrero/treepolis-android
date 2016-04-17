@@ -64,5 +64,7 @@
 
     <string name="wiki_trees_list_url">https://en.m.wikipedia.org/wiki/List_of_trees_and_shrubs_by_taxonomic_family</string>
     <string name="wiki_trees_json">wikitrees.json</string>
+    <string name="wikitrees_info_loading_error">Error loading trees info, please try again later.</string>
+    <string name="wikitrees_info_loading_progress">Loading Wiki trees info...</string>
 
 </resources>

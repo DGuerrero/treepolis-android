@@ -14,13 +14,21 @@ public class QAlertDialog {
 
 
     public QAlertDialog(Context context) {
-
         mContext = context;
     }
 
 
+    public void showDialogNeutral(int title, int message, int neutralButtonText,
+                                  DialogInterface.OnClickListener onClickListener) {
+
+        showDialogNeutral(mContext.getString(title), mContext.getString(message),
+                mContext.getString(neutralButtonText), onClickListener);
+    }
+
     public void showDialogNeutral(String title, String message, String neutralButtonText,
                                   DialogInterface.OnClickListener onClickListener) {
+
+        dismissDialog();
 
         mDialog = new AlertDialog.Builder(mContext).setTitle(title)
             .setMessage(message)
@@ -33,6 +41,8 @@ public class QAlertDialog {
                                   String buttonOkText, String buttonCancelText,
                                   DialogInterface.OnClickListener onClickOk,
                                   DialogInterface.OnClickListener onClickCancel) {
+
+        dismissDialog();
 
         mDialog = new AlertDialog.Builder(mContext).setTitle(title)
                 .setMessage(message)
