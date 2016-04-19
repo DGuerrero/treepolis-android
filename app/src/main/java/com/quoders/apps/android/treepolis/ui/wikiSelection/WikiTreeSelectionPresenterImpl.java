@@ -35,7 +35,7 @@ public class WikiTreeSelectionPresenterImpl implements WikiTreeSelectionPresente
 
         mSubscriptions.add(mInteractor.loadWikiTreeLinks()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<WikiTreeLink>>() {
+                .subscribe(new Observer<List<String>>() {
             @Override
             public void onCompleted() {
             }
@@ -46,7 +46,7 @@ public class WikiTreeSelectionPresenterImpl implements WikiTreeSelectionPresente
             }
 
             @Override
-            public void onNext(List<WikiTreeLink> treeLinks) {
+            public void onNext(List<String> treeLinks) {
                 if(treeLinks != null) {
                     mView.initWikiTreesWebview(treeLinks);
                 } else {

@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface WikiTreeSelectionView extends BaseView {
 
-    void initWikiTreesWebview(final List<WikiTreeLink> treeLinks);
+    void initWikiTreesWebview(final List<String> treeLinks);
 
     void showErrorAccessingWikiTress();
 

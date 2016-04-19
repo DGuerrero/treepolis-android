@@ -10,5 +10,5 @@ import rx.Observable;
  * Created by david on 17/04/16.
  */
 public interface WikiTreeInteractor  {
-    Observable<List<WikiTreeLink>> loadWikiTreeLinks();
+    Observable<List<String>> loadWikiTreeLinks();
 }

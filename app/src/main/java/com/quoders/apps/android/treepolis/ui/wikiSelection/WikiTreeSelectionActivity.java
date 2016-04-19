@@ -54,7 +54,7 @@ public class WikiTreeSelectionActivity extends BaseActivity implements WikiTreeS
     }
 
     @Override
-    public void initWikiTreesWebview(final List<WikiTreeLink> treeLinks) {
+    public void initWikiTreesWebview(final List<String> treeLinks) {
         final String mainUrl = getString(R.string.wiki_trees_list_url);
 
         WebViewClient webViewClient = new WebViewClient() {
@@ -69,7 +69,9 @@ public class WikiTreeSelectionActivity extends BaseActivity implements WikiTreeS
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                showLoadingProgressDialog();
+                if(mainUrl.equalsIgnoreCase(url)) {
+                    showLoadingProgressDialog();
+                }
             }
 
             @Override

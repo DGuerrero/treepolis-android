@@ -16,7 +16,9 @@ public class FileUtils {
         String jsonString;
 
         try {
-            is = context.getAssets().open(jsonFile);
+            is = context.getResources().openRawResource(
+                    context.getResources().getIdentifier(jsonFile, "raw", context.getPackageName()));
+
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);

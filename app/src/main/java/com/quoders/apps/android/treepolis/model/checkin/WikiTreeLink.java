@@ -5,27 +5,27 @@ package com.quoders.apps.android.treepolis.model.checkin;
  */
 public class WikiTreeLink {
 
-    private String mName;
-    private String mWikiLink;
+    private String name;
+    private String link;
 
     public WikiTreeLink(String name, String wikiLink) {
-        this.mName = mName;
-        this.mWikiLink = mWikiLink;
+        this.name = this.name;
+        this.link = link;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public void setName(String mName) {
-        this.mName = mName;
+        this.name = mName;
     }
 
-    public String getWikiLink() {
-        return mWikiLink;
+    public String getLink() {
+        return link;
     }
 
-    public void setWikiLink(String mWikiLink) {
-        this.mWikiLink = mWikiLink;
+    public void setLink(String mWikiLink) {
+        this.link = mWikiLink;
     }
 }
