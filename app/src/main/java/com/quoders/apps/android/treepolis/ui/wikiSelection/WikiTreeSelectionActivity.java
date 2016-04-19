@@ -3,13 +3,14 @@ package com.quoders.apps.android.treepolis.ui.wikiSelection;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 
 import com.quoders.apps.android.treepolis.BaseActivity;
 import com.quoders.apps.android.treepolis.R;
-import com.quoders.apps.android.treepolis.model.checkin.WikiTreeLink;
 import com.quoders.apps.android.treepolis.ui.dialogs.QAlertDialog;
 import com.quoders.apps.android.treepolis.ui.dialogs.QProgressDialog;
 
@@ -21,24 +22,28 @@ import butterknife.OnClick;
 
 public class WikiTreeSelectionActivity extends BaseActivity implements WikiTreeSelectionView {
 
+    private String mMainUrl;
+    private WikiTreeSelectionPresenter mPresenter;
+    private QAlertDialog mDialog = new QAlertDialog(this);
+    private QProgressDialog mProgressDialog = new QProgressDialog(this);
+
     @Bind(R.id.webViewWikiSelection) WebView mWebViewWiki;
+    @Bind(R.id.buttonWikiInfoSelect) Button mButtonSelectTree;
+    @Bind(R.id.progressBarWebviewLoading) ContentLoadingProgressBar mProgressBar;
 
     @OnClick(R.id.buttonWikiInfoSelect)
     public void onSelectTreeClick(View view) {
         mPresenter.onTreeInfoSelected(mWebViewWiki.getUrl());
     }
 
-    private WikiTreeSelectionPresenter mPresenter;
-    private QAlertDialog mDialog = new QAlertDialog(this);
-    private QProgressDialog mProgressDialog = new QProgressDialog(this);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wiki_tree_selection);
         ButterKnife.bind(this);
-        mPresenter = new WikiTreeSelectionPresenterImpl();
         initToolbar();
+        mPresenter = new WikiTreeSelectionPresenterImpl();
+        mMainUrl = getString(R.string.wiki_trees_list_url);
     }
 
     @Override
@@ -55,23 +60,25 @@ public class WikiTreeSelectionActivity extends BaseActivity implements WikiTreeS
 
     @Override
     public void initWikiTreesWebview(final List<String> treeLinks) {
-        final String mainUrl = getString(R.string.wiki_trees_list_url);
 
         WebViewClient webViewClient = new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                if(mainUrl.equalsIgnoreCase(url)) {
+                mProgressBar.setVisibility(View.GONE);
+                if(mMainUrl.equalsIgnoreCase(url)) {
                     dismissLoadingProgressDialog();
+                    mButtonSelectTree.setEnabled(false);
+                } else {
+                    mButtonSelectTree.setEnabled(true);
                 }
             }
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                if(mainUrl.equalsIgnoreCase(url)) {
-                    showLoadingProgressDialog();
-                }
+                mButtonSelectTree.setEnabled(false);
+                mProgressBar.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -85,7 +92,7 @@ public class WikiTreeSelectionActivity extends BaseActivity implements WikiTreeS
         };
 
         mWebViewWiki.setWebViewClient(webViewClient);
-        mWebViewWiki.loadUrl(mainUrl);
+        mWebViewWiki.loadUrl(mMainUrl);
     }
 
     @Override
@@ -117,5 +124,12 @@ public class WikiTreeSelectionActivity extends BaseActivity implements WikiTreeS
         mProgressDialog.stop();
     }
 
-
+    @Override
+    public void onBackPressed() {
+        if(!mMainUrl.equalsIgnoreCase(mWebViewWiki.getUrl())) {
+            mWebViewWiki.goBack();
+            return;
+        }
+        super.onBackPressed();
+    }
 }

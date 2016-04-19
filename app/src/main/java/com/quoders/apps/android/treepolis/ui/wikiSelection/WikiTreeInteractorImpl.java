@@ -1,7 +1,6 @@
 package com.quoders.apps.android.treepolis.ui.wikiSelection;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -9,17 +8,10 @@ import com.quoders.apps.android.treepolis.R;
 import com.quoders.apps.android.treepolis.model.checkin.WikiTreeLink;
 import com.quoders.apps.android.treepolis.utils.FileUtils;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import rx.Observable;
-import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -64,5 +56,10 @@ public class WikiTreeInteractorImpl implements WikiTreeInteractor {
                         });
             }
         }).subscribeOn(Schedulers.newThread());
+    }
+
+    @Override
+    public void extractTreeInfo(String url) {
+
     }
 }

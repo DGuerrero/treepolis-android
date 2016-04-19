@@ -10,7 +10,7 @@
 
     <WebView
         android:id="@+id/webViewWikiSelection"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@id/toolbar"
         android:layout_above="@+id/buttonWikiInfoSelect"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -28,5 +28,13 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"/>
+
+    <android.support.v4.widget.ContentLoadingProgressBar
+        android:id="@+id/progressBarWebviewLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyle"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>
