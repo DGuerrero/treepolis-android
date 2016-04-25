@@ -1,5 +1,7 @@
 package com.quoders.apps.android.treepolis.ui.wikiSelection;
 
+import com.quoders.apps.android.treepolis.model.checkin.WikiTreeLink;
+
 import java.util.List;
 
 import rx.Observable;
@@ -11,5 +13,5 @@ public interface WikiTreeInteractor  {
 
     Observable<List<String>> loadWikiTreeLinks();
 
-    void extractTreeInfo(String url);
+    Observable<WikiTreeLink> extractTreeInfo(String url);
 }

@@ -8,6 +8,8 @@ import com.quoders.apps.android.treepolis.BaseView;
 import com.quoders.apps.android.treepolis.di.PerActivity;
 import com.quoders.apps.android.treepolis.domain.checkin.TakeTreePictureinInteractor;
 import com.quoders.apps.android.treepolis.domain.checkin.TakeTreePictureinInteractorImpl;
+import com.quoders.apps.android.treepolis.model.checkin.WikiTreeLink;
+import com.quoders.apps.android.treepolis.ui.wikiSelection.WikiTreeSelectionActivity;
 import com.quoders.apps.android.treepolis.utils.IQSharedPrefs;
 
 import java.util.Map;
@@ -89,7 +91,7 @@ public class CheckinPresenterImpl implements CheckinPresenter {
     }
 
     @Override
-    public void onKnownTreeClicked() {
+    public void onFindTreeInWikipediaClicked() {
         mView.navigateToWikipediaTreeInfoSelector();
     }
 
@@ -114,8 +116,11 @@ public class CheckinPresenterImpl implements CheckinPresenter {
 
     @Override
     public void processWikiTreeSelection(int resultCode, Intent data) {
-        if(resultCode == Activity.RESULT_OK) {
+        if(resultCode == Activity.RESULT_OK && data != null) {
+            WikiTreeLink wikiTreeLink = (WikiTreeLink)data.getSerializableExtra(WikiTreeSelectionActivity.WIKI_TREE_DATA_RESULT);
+            mView.displayTreeInfo(wikiTreeLink);
         } else {
+            mView.displayErrorTakingTreeInfo();
         }
     }
 }

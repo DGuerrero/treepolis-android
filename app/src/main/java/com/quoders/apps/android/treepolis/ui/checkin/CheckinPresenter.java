@@ -17,7 +17,7 @@ public interface CheckinPresenter extends BasePresenter {
 
     void onNotKnownTreeClicked();
 
-    void onKnownTreeClicked();
+    void onFindTreeInWikipediaClicked();
 
     void onRequestPermissionsWriteStorageGranted();
 

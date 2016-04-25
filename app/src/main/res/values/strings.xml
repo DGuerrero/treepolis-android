@@ -51,11 +51,12 @@
     <string name="checkTreePicsTitle">Tap to add pictures of the tree, leaf and fruit</string>
     <string name="dialog_title_error">Error</string>
     <string name="dialog_message_error_taking_picture">Error taking the picture.</string>
+    <string name="dialog_message_error_processing_wiki_tree_info">Error processing tree info from Wikipedia. Please try again later.</string>
     <string name="checkin_tree_name">Name:</string>
     <string name="checkin_tree_description">Description:</string>
     <string name="not_known_tree">I don\'t know this tree</string>
     <string name="known_tree">Let me identify this tree</string>
-    <string name="checkTreeInfoTitle">Add tree information if you know it</string>
+    <string name="checkTreeInfoTitle">Add tree name</string>
     <string name="checkTreeMapTitle">Be sure you are close the tree and location accuracy is highest possible</string>
     <string name="wiki_select_tree">Select this tree</string>
 
@@ -66,5 +67,6 @@
     <string name="wiki_trees_json">wikitrees</string>
     <string name="wikitrees_info_loading_error">Error loading trees info, please try again later.</string>
     <string name="wikitrees_info_loading_progress">Loading Wiki trees info...</string>
+    <string name="find_tree">Find tree in Wikipedia</string>
 
 </resources>

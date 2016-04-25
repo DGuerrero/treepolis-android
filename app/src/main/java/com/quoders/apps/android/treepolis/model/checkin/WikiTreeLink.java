@@ -1,9 +1,11 @@
 package com.quoders.apps.android.treepolis.model.checkin;
 
+import java.io.Serializable;
+
 /**
  * Created by davidguerrerodiaz on 13/04/16.
  */
-public class WikiTreeLink {
+public class WikiTreeLink implements Serializable {
 
     private String name;
     private String link;

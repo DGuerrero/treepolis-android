@@ -15,6 +15,7 @@ import com.quoders.apps.android.treepolis.R;
 import com.quoders.apps.android.treepolis.TreepolisApplication;
 import com.quoders.apps.android.treepolis.helpers.PermissionsHelper;
 import com.quoders.apps.android.treepolis.model.ImageUtils;
+import com.quoders.apps.android.treepolis.model.checkin.WikiTreeLink;
 import com.quoders.apps.android.treepolis.ui.maps.GoogleMapsMng;
 import com.quoders.apps.android.treepolis.ui.maps.LocationMng;
 import com.quoders.apps.android.treepolis.ui.widgets.CircleButton;
@@ -36,7 +37,6 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
     @Bind(R.id.circleButtonLeafPhoto) CircleButton mCircleButtonLeaf;
     @Bind(R.id.circleButtonFruitPhoto) CircleButton mCircleButtonFruit;
     @Bind(R.id.textViewTreeName) TextView mTvTreeName;
-    @Bind(R.id.textViewTreeDescription) TextView mTvTreeDescription;
 
     @Inject
     CheckinPresenter mPresenter;
@@ -86,6 +86,9 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
     protected void onStop() {
         super.onStop();
         dismissAlertDialog();
+        if(mLocationMng != null) {
+            mLocationMng.stopLocationService();
+        }
     }
 
     private void initTakePhotoButtons() {
@@ -143,7 +146,6 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
     @Override
     public void clearTreeInfoView() {
         mTvTreeName.setText(R.string.checkin_tree_name);
-        mTvTreeDescription.setText(R.string.checkin_tree_description);
     }
 
     @Override
@@ -163,6 +165,17 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
     }
 
     @Override
+    public void displayErrorTakingTreeInfo() {
+        displayAlertDialog(getString(R.string.dialog_title_error),
+                getString(R.string.dialog_message_error_processing_wiki_tree_info));
+    }
+
+    @Override
+    public void displayTreeInfo(WikiTreeLink wikiTreeLink) {
+        //  TODO
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -173,14 +186,6 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onChekinKnownTreeClick(View view) {
-        mPresenter.onKnownTreeClicked();
-    }
-
-    public void onChekinUnknownTreeClick(View view) {
-        mPresenter.onNotKnownTreeClicked();
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
 
@@ -189,5 +194,9 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
         } else {
             mPresenter.onRequestPermissionsWriteStorageDenied();
         }
+    }
+
+    public void onFindTreeInWikipedia(View view) {
+        mPresenter.onFindTreeInWikipediaClicked();
     }
 }

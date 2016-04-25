@@ -1,6 +1,7 @@
 package com.quoders.apps.android.treepolis.ui.wikiSelection;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.widget.ContentLoadingProgressBar;
@@ -11,6 +12,7 @@ import android.widget.Button;
 
 import com.quoders.apps.android.treepolis.BaseActivity;
 import com.quoders.apps.android.treepolis.R;
+import com.quoders.apps.android.treepolis.model.checkin.WikiTreeLink;
 import com.quoders.apps.android.treepolis.ui.dialogs.QAlertDialog;
 import com.quoders.apps.android.treepolis.ui.dialogs.QProgressDialog;
 
@@ -21,6 +23,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class WikiTreeSelectionActivity extends BaseActivity implements WikiTreeSelectionView {
+
+    public static final String WIKI_TREE_DATA_RESULT = "com.quoders.apps.android.treepolis.ui.wikiSelection.WIKI_TREE_DATA_RESULT";
 
     private String mMainUrl;
     private WikiTreeSelectionPresenter mPresenter;
@@ -122,6 +126,14 @@ public class WikiTreeSelectionActivity extends BaseActivity implements WikiTreeS
     @Override
     public void dismissLoadingProgressDialog() {
         mProgressDialog.stop();
+    }
+
+    @Override
+    public void returnSelectedWikiTree(WikiTreeLink wikiTreeLink) {
+        Intent intent = new Intent();
+        intent.putExtra(WIKI_TREE_DATA_RESULT, wikiTreeLink);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     @Override

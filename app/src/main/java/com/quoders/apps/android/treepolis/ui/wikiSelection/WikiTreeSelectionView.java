@@ -19,4 +19,6 @@ public interface WikiTreeSelectionView extends BaseView {
     void showLoadingProgressDialog();
 
     void dismissLoadingProgressDialog();
+
+    void returnSelectedWikiTree(WikiTreeLink wikiTreeLink);
 }
