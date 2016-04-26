@@ -3,6 +3,7 @@
                 android:id="@+id/relativeLayoutCheckinTreeRoot"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:focusableInTouchMode="true"
                 tools:context=".ui.checkin.CheckinActivity">
 
     <include layout="@layout/toolbar"/>
@@ -88,18 +89,6 @@
                 android:layout_marginTop="30dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textViewTreeInfoTitle"
-                    android:text="@string/checkTreeInfoTitle"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="10dp"
-                    android:gravity="center"
-                    android:layout_gravity="left"
-                    android:textSize="@dimen/text_standard_subtitle"
-                    android:textColor="@color/primary_dark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textInputLayoutUserName"
                     android:layout_width="match_parent"
@@ -107,9 +96,9 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp">
                     <EditText
-                        android:id="@+id/textViewTreeName"
-                        android:text="@string/checkin_tree_name"
+                        android:id="@+id/editTextViewTreeName"
                         android:textSize="@dimen/text_standard"
+                        android:hint="@string/checkTreeInfoTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 </android.support.design.widget.TextInputLayout>

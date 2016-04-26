@@ -10,7 +10,7 @@ import com.quoders.apps.android.treepolis.R;
 import com.quoders.apps.android.treepolis.ui.dialogs.QAlertDialog;
 import com.quoders.apps.android.treepolis.ui.dialogs.QProgressDialog;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -18,10 +18,10 @@ public class SignupActivity extends BaseActivity implements SignupView {
 
     public static final int REQUEST_ID_SIGNUP = 0x0001;
 
-    @Bind(R.id.editTextCreateUserName)    EditText mEtCreateUserName;
-    @Bind(R.id.editTextCreateEmail)       EditText mEtCreateEmail;
-    @Bind(R.id.editTextCreatePassword)    EditText mEtCreatePassword;
-    @Bind(R.id.editTextPasswordConfirm)   EditText mEtCreatePasswordConfirm;
+    @BindView(R.id.editTextCreateUserName)    EditText mEtCreateUserName;
+    @BindView(R.id.editTextCreateEmail)       EditText mEtCreateEmail;
+    @BindView(R.id.editTextCreatePassword)    EditText mEtCreatePassword;
+    @BindView(R.id.editTextPasswordConfirm)   EditText mEtCreatePasswordConfirm;
 
 
     @OnClick(R.id.buttonSignUp)

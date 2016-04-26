@@ -60,7 +60,7 @@ public class WikiTreeInteractorImpl implements WikiTreeInteractor {
 
     @Override
     public Observable<WikiTreeLink> extractTreeInfo(String url) {
-        String treeName = url.substring(url.lastIndexOf("/"));
+        String treeName = url.substring(url.lastIndexOf("/")+1);
         treeName = treeName.replaceAll("_", " ");
         WikiTreeLink treeInfo = new WikiTreeLink(treeName, url);
         return Observable.just(treeInfo);

@@ -14,14 +14,14 @@ import com.quoders.apps.android.treepolis.ui.dialogs.QProgressDialog;
 import com.quoders.apps.android.treepolis.ui.home.HomeActivity;
 import com.quoders.apps.android.treepolis.ui.signup.SignupActivity;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class WelcomeActivity extends AppCompatActivity implements WelcomeView {
 
-    @Bind(R.id.editTextUserNameLogin)     EditText mEtUserName;
-    @Bind(R.id.editTextPasswordLogin)     EditText mEtUserPassword;
+    @BindView(R.id.editTextUserNameLogin)     EditText mEtUserName;
+    @BindView(R.id.editTextPasswordLogin)     EditText mEtUserPassword;
 
     @OnClick(R.id.loginButton)
     public void loginButtonClick(View view) {

@@ -15,8 +15,6 @@ public interface CheckinPresenter extends BasePresenter {
 
     void onImageCaptureError();
 
-    void onNotKnownTreeClicked();
-
     void onFindTreeInWikipediaClicked();
 
     void onRequestPermissionsWriteStorageGranted();
@@ -26,4 +24,6 @@ public interface CheckinPresenter extends BasePresenter {
     void processImageCaptureResult(int resultCode);
 
     void processWikiTreeSelection(int resultCode, Intent data);
+
+    void onSubmitTreeClicked();
 }

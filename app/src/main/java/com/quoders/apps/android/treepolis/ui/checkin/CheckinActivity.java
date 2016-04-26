@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import com.google.android.gms.maps.SupportMapFragment;
 import com.quoders.apps.android.treepolis.BaseActivity;
@@ -25,18 +25,24 @@ import java.io.File;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class CheckinActivity extends BaseActivity implements CheckinView {
 
     private static final int REQUEST_IMAGE_CAPTURE = 0x0001;
     private static final int REQUEST_CODE_WIKIPEDIA_TREE_SELECTION = 0x9001;
 
-    @Bind(R.id.circleButtonTreePhoto) CircleButton mCircleButtonTree;
-    @Bind(R.id.circleButtonLeafPhoto) CircleButton mCircleButtonLeaf;
-    @Bind(R.id.circleButtonFruitPhoto) CircleButton mCircleButtonFruit;
-    @Bind(R.id.textViewTreeName) TextView mTvTreeName;
+    @BindView(R.id.circleButtonTreePhoto) CircleButton mCircleButtonTree;
+    @BindView(R.id.circleButtonLeafPhoto) CircleButton mCircleButtonLeaf;
+    @BindView(R.id.circleButtonFruitPhoto) CircleButton mCircleButtonFruit;
+    @BindView(R.id.editTextViewTreeName) EditText mEtTreeName;
+
+    @OnClick(R.id.buttonSubmitTree)
+    void onSubmitTreeClick() {
+        mPresenter.onSubmitTreeClicked();
+    }
 
     @Inject
     CheckinPresenter mPresenter;
@@ -145,7 +151,7 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
 
     @Override
     public void clearTreeInfoView() {
-        mTvTreeName.setText(R.string.checkin_tree_name);
+        mEtTreeName.setText(R.string.checkin_tree_name);
     }
 
     @Override
@@ -172,7 +178,9 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
 
     @Override
     public void displayTreeInfo(WikiTreeLink wikiTreeLink) {
-        //  TODO
+        if(wikiTreeLink != null) {
+            mEtTreeName.setText(wikiTreeLink.getName());
+        }
     }
 
     @Override

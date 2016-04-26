@@ -18,7 +18,7 @@ import com.quoders.apps.android.treepolis.ui.dialogs.QProgressDialog;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -31,9 +31,9 @@ public class WikiTreeSelectionActivity extends BaseActivity implements WikiTreeS
     private QAlertDialog mDialog = new QAlertDialog(this);
     private QProgressDialog mProgressDialog = new QProgressDialog(this);
 
-    @Bind(R.id.webViewWikiSelection) WebView mWebViewWiki;
-    @Bind(R.id.buttonWikiInfoSelect) Button mButtonSelectTree;
-    @Bind(R.id.progressBarWebviewLoading) ContentLoadingProgressBar mProgressBar;
+    @BindView(R.id.webViewWikiSelection) WebView mWebViewWiki;
+    @BindView(R.id.buttonWikiInfoSelect) Button mButtonSelectTree;
+    @BindView(R.id.progressBarWebviewLoading) ContentLoadingProgressBar mProgressBar;
 
     @OnClick(R.id.buttonWikiInfoSelect)
     public void onSelectTreeClick(View view) {

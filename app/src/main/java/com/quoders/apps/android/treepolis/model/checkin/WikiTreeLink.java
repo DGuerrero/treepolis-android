@@ -11,8 +11,8 @@ public class WikiTreeLink implements Serializable {
     private String link;
 
     public WikiTreeLink(String name, String wikiLink) {
-        this.name = this.name;
-        this.link = link;
+        this.name = name;
+        this.link = wikiLink;
     }
 
     public String getName() {

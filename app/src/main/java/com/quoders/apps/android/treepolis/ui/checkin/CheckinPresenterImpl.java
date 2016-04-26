@@ -28,6 +28,7 @@ public class CheckinPresenterImpl implements CheckinPresenter {
     private final IQSharedPrefs mPreferences;
     private int mPhotoButtonId;
     private String mPictureFullPath;
+    private WikiTreeLink mWikiTreeLink;
 
 
     @Inject
@@ -86,11 +87,6 @@ public class CheckinPresenterImpl implements CheckinPresenter {
     }
 
     @Override
-    public void onNotKnownTreeClicked() {
-        mView.clearTreeInfoView();
-    }
-
-    @Override
     public void onFindTreeInWikipediaClicked() {
         mView.navigateToWikipediaTreeInfoSelector();
     }
@@ -117,10 +113,19 @@ public class CheckinPresenterImpl implements CheckinPresenter {
     @Override
     public void processWikiTreeSelection(int resultCode, Intent data) {
         if(resultCode == Activity.RESULT_OK && data != null) {
-            WikiTreeLink wikiTreeLink = (WikiTreeLink)data.getSerializableExtra(WikiTreeSelectionActivity.WIKI_TREE_DATA_RESULT);
-            mView.displayTreeInfo(wikiTreeLink);
-        } else {
-            mView.displayErrorTakingTreeInfo();
+            mWikiTreeLink = (WikiTreeLink)data.getSerializableExtra(WikiTreeSelectionActivity.WIKI_TREE_DATA_RESULT);
+            mView.displayTreeInfo(mWikiTreeLink);
         }
+    }
+
+    @Override
+    public void onSubmitTreeClicked() {
+        //  Check if we have at least pictures of the tree and leaf
+
+        //  Check we have valid name
+
+        //  Check location accuracy
+
+        //  Submit!
     }
 }
