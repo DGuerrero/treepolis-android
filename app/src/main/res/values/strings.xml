@@ -68,5 +68,11 @@
     <string name="wikitrees_info_loading_error">Error loading trees info, please try again later.</string>
     <string name="wikitrees_info_loading_progress">Loading Wiki trees info...</string>
     <string name="find_tree">Find tree in Wikipedia</string>
+    <string name="dialog_message_error_need_add_pictures">You need to add at least a picture of the tree and leaf.</string>
+    <string name="dialog_message_error_need_add_name">You need to add the tree name before submit it.</string>
+    <string name="dialog_message_error_location_not_accurated">Your location accuracy needs to be better. Try to switch on your GPS and Wifi.</string>
+    <string name="dialog_button_cancel">Cancel</string>
+    <string name="action_submit_tree">Submit tree</string>
+    <string name="confirm_submit_tree">Submit this tree with the information provided?</string>
 
 </resources>

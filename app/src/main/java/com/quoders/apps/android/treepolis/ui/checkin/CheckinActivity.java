@@ -1,12 +1,15 @@
 package com.quoders.apps.android.treepolis.ui.checkin;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.EditText;
 
 import com.google.android.gms.maps.SupportMapFragment;
@@ -62,8 +65,18 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
         initTakePhotoButtons();
         initMapFragment();
         initLocationManager();
+        initViewLayoutListener(this);
+    }
 
-        mPresenter.onViewAttached(this);
+    private void initViewLayoutListener(final CheckinActivity checkinActivity) {
+        final View content = findViewById(R.id.relativeLayoutCheckinTreeRoot);
+        content.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mPresenter.onViewAttached(checkinActivity);
+                content.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+            }
+        });
     }
 
     @Override
@@ -181,6 +194,50 @@ public class CheckinActivity extends BaseActivity implements CheckinView {
         if(wikiTreeLink != null) {
             mEtTreeName.setText(wikiTreeLink.getName());
         }
+    }
+
+    @Override
+    public void displayErrorNeedToAddPictures() {
+        displayAlertDialog(getString(R.string.dialog_title_error),
+                getString(R.string.dialog_message_error_need_add_pictures));
+    }
+
+    @Override
+    public void displayErrorTreeNameEmpty() {
+        displayAlertDialog(getString(R.string.dialog_title_error),
+                getString(R.string.dialog_message_error_need_add_name));
+    }
+
+    @Override
+    public void displayErrorLocationNotAccurated() {
+        displayAlertDialog(getString(R.string.dialog_title_error),
+                getString(R.string.dialog_message_error_location_not_accurated));
+    }
+
+    @Override
+    public boolean getLocationAccuracy() {
+        return mLocationMng.isAccuracyEnough();
+    }
+
+    @Override
+    public Location getCurrentLocation() {
+        return mLocationMng.getLastLocation();
+    }
+
+    @Override
+    public void displayConfirmCheckinDialog() {
+        displayAlertDialogConfirm(getString(R.string.action_submit_tree), getString(R.string.confirm_submit_tree),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mPresenter.onSubmitTreeConfirmed();
+                    }
+                });
+    }
+
+    @Override
+    public String getTreeName() {
+        return mEtTreeName.getText().toString();
     }
 
     @Override

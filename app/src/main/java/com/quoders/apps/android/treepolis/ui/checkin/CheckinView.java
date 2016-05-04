@@ -1,5 +1,7 @@
 package com.quoders.apps.android.treepolis.ui.checkin;
 
+import android.location.Location;
+
 import com.quoders.apps.android.treepolis.BaseView;
 import com.quoders.apps.android.treepolis.model.checkin.WikiTreeLink;
 
@@ -25,4 +27,18 @@ public interface CheckinView extends BaseView {
     void displayErrorTakingTreeInfo();
 
     void displayTreeInfo(WikiTreeLink wikiTreeLink);
+
+    void displayErrorNeedToAddPictures();
+
+    String getTreeName();
+
+    void displayErrorTreeNameEmpty();
+
+    void displayErrorLocationNotAccurated();
+
+    boolean getLocationAccuracy();
+
+    Location getCurrentLocation();
+
+    void displayConfirmCheckinDialog();
 }

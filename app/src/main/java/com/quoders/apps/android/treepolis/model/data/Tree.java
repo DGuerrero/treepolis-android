@@ -12,7 +12,7 @@ public class Tree {
     private String mNameCommon;
     private String mNameScientific;
     private User mUserAuthor;
-    private TreePhoto mPhotos;
+    private TreePhotos mPhotos;
     private double mLatitude;
     private double mLongitude;
     private boolean mVerified;
@@ -58,11 +58,11 @@ public class Tree {
         this.mUserAuthor = mUserAuthor;
     }
 
-    public TreePhoto getPhotos() {
+    public TreePhotos getPhotos() {
         return mPhotos;
     }
 
-    public void setPhotos(TreePhoto mPhotos) {
+    public void setPhotos(TreePhotos mPhotos) {
         this.mPhotos = mPhotos;
     }
 

@@ -26,4 +26,6 @@ public interface CheckinPresenter extends BasePresenter {
     void processWikiTreeSelection(int resultCode, Intent data);
 
     void onSubmitTreeClicked();
+
+    void onSubmitTreeConfirmed();
 }
