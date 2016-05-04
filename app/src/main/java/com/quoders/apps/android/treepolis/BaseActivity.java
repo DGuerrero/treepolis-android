@@ -3,6 +3,7 @@ package com.quoders.apps.android.treepolis;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -42,28 +43,35 @@ public abstract class BaseActivity extends AppCompatActivity {
         return ((TreepolisApplication)getApplication()).getNetComponent();
       }
 
-        protected void displayAlertDialog(String title, String message) {
-            dismissAlertDialog();
-            mAlertDialog = new QAlertDialog(this);
-            mAlertDialog.showDialogNeutral(title, message, getString(R.string.dialog_button_ok), null);
-        }
+    protected void displayAlertDialog(String title, String message) {
+        dismissAlertDialog();
+        mAlertDialog = new QAlertDialog(this);
+        mAlertDialog.showDialogNeutral(title, message, getString(R.string.dialog_button_ok), null);
+    }
 
-        protected void dismissAlertDialog() {
-            if (mAlertDialog != null) {
-                mAlertDialog.dismissDialog();
-                mAlertDialog = null;
+    protected void displayAlertDialogConfirm(String title, String message, DialogInterface.OnClickListener onClickListener) {
+        dismissAlertDialog();
+        mAlertDialog = new QAlertDialog(this);
+        mAlertDialog.showDialogConfirm(title, message, getString(R.string.dialog_button_ok),
+                getString(R.string.dialog_button_cancel), onClickListener, null);
+    }
+
+    protected void dismissAlertDialog() {
+        if (mAlertDialog != null) {
+            mAlertDialog.dismissDialog();
+            mAlertDialog = null;
+        }
+    }
+
+    protected void initToolbar() {
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar != null) {
+            setSupportActionBar(toolbar);
+            ActionBar actionBar = getSupportActionBar();
+
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
             }
         }
-
-      protected void initToolbar() {
-          final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-          if(toolbar != null) {
-          setSupportActionBar(toolbar);
-          ActionBar actionBar = getSupportActionBar();
-
-          if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-          }
-        }
-      }
+    }
 }
