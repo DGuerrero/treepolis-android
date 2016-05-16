@@ -2,6 +2,11 @@ package com.quoders.apps.android.treepolis.di;
 
 import android.app.Application;
 
+import com.quoders.apps.android.treepolis.domain.checkin.CheckinTreeStorage;
+import com.quoders.apps.android.treepolis.domain.checkin.TreePicturesInteractor;
+import com.quoders.apps.android.treepolis.domain.checkin.TreePicturesInteractorImpl;
+import com.quoders.apps.android.treepolis.domain.checkin.TreeUploaderInteractor;
+import com.quoders.apps.android.treepolis.domain.checkin.TreeUploaderInteractorImpl;
 import com.quoders.apps.android.treepolis.ui.checkin.CheckinPresenter;
 import com.quoders.apps.android.treepolis.ui.checkin.CheckinPresenterImpl;
 import com.quoders.apps.android.treepolis.utils.IQSharedPrefs;
@@ -26,8 +31,22 @@ public class CheckinModule {
 
     @Provides
     @Singleton
-    CheckinPresenter provideCheckinPresenter(IQSharedPrefs preferences, Application application) {
-        CheckinPresenter presenter = new CheckinPresenterImpl(preferences, application);
+    TreeUploaderInteractor provideTreeUploaderInteractor(Application application) {
+        TreeUploaderInteractor interactor = new TreeUploaderInteractorImpl(application);
+        return interactor;
+    }
+
+    @Provides
+    @Singleton
+    TreePicturesInteractor provideCheckinInteractor(Application application, CheckinTreeStorage treeStorage) {
+        TreePicturesInteractor interactor = new TreePicturesInteractorImpl(application, treeStorage);
+        return interactor;
+    }
+
+    @Provides
+    @Singleton
+    CheckinPresenter provideCheckinPresenter(Application application, CheckinTreeStorage treeStorage) {
+        CheckinPresenter presenter = new CheckinPresenterImpl(application, treeStorage);
         return presenter;
     }
 
@@ -35,5 +54,11 @@ public class CheckinModule {
     @Singleton
     IQSharedPrefs providesSharedPreferences(Application application) {
         return new QSharedPrefs(application);
+    }
+
+    @Provides
+    @Singleton
+    CheckinTreeStorage provideTreeStorage(IQSharedPrefs preferences) {
+        return new CheckinTreeStorage(preferences);
     }
 }

@@ -3,8 +3,11 @@ package com.quoders.apps.android.treepolis.model;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.util.Base64;
 import android.view.View;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -14,6 +17,31 @@ import java.util.Date;
  * Created by davidguerrerodiaz on 03/01/16.
  */
 public class ImageUtils {
+
+    public static String bitmapFileToBase64(String path, int quality) {
+        String base64 = "";
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        Bitmap bitmap = BitmapFactory.decodeFile(path, options);
+        if(bitmap != null) {
+            return bitmapToBase64(bitmap, quality);
+        }
+        return base64;
+    }
+
+    public static String bitmapToBase64(@NonNull Bitmap bitmap, int quality) {
+        return byteArrayToBase64(bitmapToByteArray(bitmap, quality));
+    }
+
+    public static byte[] bitmapToByteArray(Bitmap bitmap, int quality) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream);
+        return stream.toByteArray();
+    }
+
+    public static String byteArrayToBase64(byte[] byteArray) {
+        return Base64.encodeToString(byteArray, Base64.NO_WRAP);
+    }
 
     public static File buildImageFilePath(String filename) throws IOException {
 

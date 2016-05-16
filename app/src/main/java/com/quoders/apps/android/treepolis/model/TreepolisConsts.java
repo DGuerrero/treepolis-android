@@ -6,4 +6,6 @@ package com.quoders.apps.android.treepolis.model;
 public class TreepolisConsts {
 
     public static final String FIREBASE_TREEPOLIS_URL = "https://treepolis.firebaseio.com";
+
+    public static final int TREE_IMAGE_QUALITY = 50;
 }

@@ -16,9 +16,10 @@ public class LocationMng implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         com.google.android.gms.location.LocationListener {
 
-    private LocationManagerCallback mCallback;
+    private static final float MAX_ACCURACY = 80f;
 
-    LocationRequest mLocationRequest;
+    private LocationManagerCallback mCallback;
+    private LocationRequest mLocationRequest;
     protected GoogleApiClient mGoogleApiClient;
     protected Location mCurrentLocation;
     private boolean mRequestingLocationUpdates;
@@ -115,6 +116,10 @@ public class LocationMng implements GoogleApiClient.ConnectionCallbacks,
     protected void startLocationUpdates() {
         mRequestingLocationUpdates = true;
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+    }
+
+    public boolean isAccuracyEnough() {
+        return mCurrentLocation.getAccuracy() < MAX_ACCURACY;
     }
 
     public interface LocationManagerCallback {
